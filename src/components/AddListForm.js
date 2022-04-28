@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { postData } from "../helpers/postData";
 
 const schema = yup.object().shape({
   list: yup
@@ -20,24 +21,7 @@ const AddListForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => addList(data.list);
-
-  const addList = (name) => {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name,
-      }),
-    };
-
-    fetch(
-      "https://626abc396a86cd64adb203dd.mockapi.io/api/list",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  };
+  const onSubmit = (data) => postData("list", data.list);
 
   return (
     <>
