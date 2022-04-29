@@ -2,7 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { postData } from "../helpers/postData";
+import { useDispatch } from "react-redux";
+import { postNameList } from "../redux/globalSlice";
 
 const schema = yup.object().shape({
   list: yup
@@ -13,6 +14,8 @@ const schema = yup.object().shape({
 });
 
 const AddListForm = () => {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -21,7 +24,7 @@ const AddListForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => postData("list", data.list);
+  const onSubmit = (data) => dispatch(postNameList(data.list));
 
   return (
     <>
