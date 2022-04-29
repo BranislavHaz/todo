@@ -1,4 +1,5 @@
 import AddListForm from "./components/AddListForm";
+import ToDoList from "./components/ToDoList";
 import "./App.css";
 import { store } from "./store";
 import { Provider } from "react-redux";
@@ -9,6 +10,7 @@ function App() {
       <div className="App">
         <h1>Hello</h1>
         <AddListForm />
+        <ToDoList />
       </div>
     </Provider>
   );

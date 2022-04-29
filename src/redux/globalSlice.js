@@ -1,5 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  todos: null,
+};
+
+export const globalSlice = createSlice({
+  name: "global",
+  initialState,
+  reducers: {
+    setItems: (state, action) => {
+      state.todos = action.payload;
+    },
+  },
+});
+
+export const { setItems } = globalSlice.actions;
+
+export default globalSlice.reducer;
+
+// Post Name of List
 export const postNameList = createAsyncThunk(
   "global/postNameList",
   async (data) => {
@@ -14,20 +33,17 @@ export const postNameList = createAsyncThunk(
     fetch(
       "https://626abc396a86cd64adb203dd.mockapi.io/api/list",
       requestOptions
-    )
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    );
   }
 );
 
-const initialState = {};
-
-export const globalSlice = createSlice({
-  name: "global",
-  initialState,
-  reducers: {},
-});
-
-export const {} = globalSlice.actions;
-
-export default globalSlice.reducer;
+// Load To Do Items
+export const getToDoItems = (id) => {
+  return async (dispatch) => {
+    const response = await fetch(
+      `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todos`
+    );
+    const data = await response.json();
+    dispatch(setItems(data));
+  };
+};

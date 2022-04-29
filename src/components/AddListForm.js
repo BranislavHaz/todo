@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -14,6 +14,7 @@ const schema = yup.object().shape({
 });
 
 const AddListForm = () => {
+  const formRef = useRef();
   const dispatch = useDispatch();
 
   const {
@@ -24,11 +25,14 @@ const AddListForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => dispatch(postNameList(data.list));
+  const onSubmit = (data) => {
+    dispatch(postNameList(data.list));
+    formRef.current.reset();
+  };
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
         <input type="text" {...register("list")} />
         {errors.list && <span>{errors.list?.message}</span>}
         <input type="submit" />
