@@ -2,20 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  todo: null,
+  todoList: null,
+  urlParams: null,
 };
 
 export const todoSlice = createSlice({
-  name: "global",
+  name: "todo",
   initialState,
   reducers: {
     setItems: (state, action) => {
-      state.todo = action.payload;
+      state.todoList = action.payload;
+    },
+    setUrlParams: (state, action) => {
+      state.urlParams = action.payload;
     },
   },
 });
 
-export const { setItems } = todoSlice.actions;
+export const { setItems, setUrlParams } = todoSlice.actions;
 
 export default todoSlice.reducer;
 
@@ -23,7 +27,9 @@ export default todoSlice.reducer;
 export const getTodoItems = (id) => {
   return (dispatch) => {
     axios
-      .get(`https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todo`)
+      .get(
+        `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todolist`
+      )
       .then((resp) => dispatch(setItems(resp.data)));
   };
 };
@@ -41,17 +47,20 @@ export const postTodoList = (data) => {
 export const postTodoItem = (id, data) => {
   return (dispatch) => {
     axios
-      .post(`https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todo`, {
-        listId: id,
-        title: data.title,
-        text: data.text,
-        deadline: +new Date(data.deadline),
-        isCompleted: false,
-      })
+      .post(
+        `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todolist`,
+        {
+          listId: id,
+          title: data.title,
+          text: data.text,
+          deadline: +new Date(data.deadline),
+          isCompleted: false,
+        }
+      )
       .then(
         axios
           .get(
-            `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todo`
+            `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todolist`
           )
           .then((resp) => dispatch(setItems(resp.data)))
       );

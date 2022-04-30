@@ -1,22 +1,25 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getTodoItems } from "../redux/todoSlice";
+import { getTodoItems, setUrlParams } from "../redux/todoSlice";
 
 import TodoItem from "./TodoItem";
 
 const TodoList = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const { todo } = useSelector((state) => state.todo);
+  const { todoList } = useSelector((state) => state.todo);
 
   useEffect(() => {
-    dispatch(getTodoItems(1));
+    dispatch(getTodoItems(+id));
+    dispatch(setUrlParams(+id));
   }, [dispatch]);
 
   return (
     <div>
-      <h1>Active</h1>
-      {todo
+      <h1>{id}</h1>
+      {todoList
         ?.filter((todo) => !todo.isCompleted)
         .sort((a, b) => (a.deadline < b.deadline ? 1 : -1))
         .map((todo, id) => {

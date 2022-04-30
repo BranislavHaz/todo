@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { postTodoItem, getTodoItems } from "../redux/todoSlice";
 
@@ -25,6 +26,7 @@ const schema = yup.object().shape({
 
 const AddTodoItem = () => {
   const formRef = useRef(null);
+  const { urlParams } = useSelector((state) => state.todo);
   const dispatch = useDispatch();
 
   const {
@@ -37,8 +39,8 @@ const AddTodoItem = () => {
 
   const onSubmit = (data) => {
     formRef.current.reset();
-    dispatch(postTodoItem(1, data));
-    dispatch(getTodoItems(1));
+    dispatch(postTodoItem(urlParams, data));
+    dispatch(getTodoItems(urlParams));
   };
 
   return (
