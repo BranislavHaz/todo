@@ -1,4 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   todos: null,
@@ -18,32 +19,20 @@ export const { setItems } = globalSlice.actions;
 
 export default globalSlice.reducer;
 
-// Post a list name
-export const postNameList = createAsyncThunk(
-  "global/postNameList",
-  async (data) => {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: data,
-      }),
-    };
-
-    fetch(
-      "https://626abc396a86cd64adb203dd.mockapi.io/api/list",
-      requestOptions
-    );
-  }
-);
-
 // Load todo items
 export const getToDoItems = (id) => {
-  return async (dispatch) => {
-    const response = await fetch(
-      `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todos`
-    );
-    const data = await response.json();
-    dispatch(setItems(data));
+  return (dispatch) => {
+    axios
+      .get(`https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todos`)
+      .then((resp) => dispatch(setItems(resp.data)));
+  };
+};
+
+// Post a list name
+export const postNameList = (data) => {
+  return (dispatch) => {
+    axios.post("https://626abc396a86cd64adb203dd.mockapi.io/api/list", {
+      name: data,
+    });
   };
 };
