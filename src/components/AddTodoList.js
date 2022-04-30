@@ -20,6 +20,7 @@ const AddTodoList = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -28,6 +29,7 @@ const AddTodoList = () => {
   const onSubmit = (data) => {
     dispatch(postTodoList(data.name));
     dispatch(getTodoList());
+    reset();
     formRef.current.reset();
   };
 

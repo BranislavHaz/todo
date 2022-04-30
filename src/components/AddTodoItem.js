@@ -32,6 +32,7 @@ const AddTodoItem = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -41,6 +42,7 @@ const AddTodoItem = () => {
     formRef.current.reset();
     dispatch(postTodoItem(urlParams, data));
     dispatch(getTodoItems(urlParams));
+    reset();
   };
 
   return (
