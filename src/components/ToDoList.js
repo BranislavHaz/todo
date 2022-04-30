@@ -1,38 +1,26 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getToDoItems } from "../redux/globalSlice";
+import { useSelector } from "react-redux";
+
+import ToDoItem from "./ToDoItem";
 
 const ToDoList = () => {
-  const dispatch = useDispatch();
   const { todos } = useSelector((state) => state.global);
 
   useEffect(() => {
-    // aj v AddToDoForm.js
-    dispatch(getToDoItems(1));
-  }, [dispatch]);
+    console.log("hello");
+  }, [todos]);
 
   return (
     <div>
-      <h1>ahoj</h1>
-      {todos?.map((todo) => {
-        const date = new Date(todo.deadline).toLocaleString();
-        // const date = new Date(todo.deadline).toLocaleDateString();
-        // const date = new Date(todo.deadline).toLocaleTimeString();
-
-        return (
-          <div key={todo.id}>
-            <h1>{todo.title}</h1>
-            <p>{todo.text}</p>
-            <p>{date}</p>
-          </div>
-        );
-      })}
+      <h1>Active</h1>
+      {todos
+        ?.filter((todo) => !todo.isCompleted)
+        .sort((a, b) => (a.deadline < b.deadline ? 1 : -1))
+        .map((todo, id) => {
+          return <ToDoItem key={id} data={todo} />;
+        })}
     </div>
   );
 };
 
 export default ToDoList;
-
-useEffect(() => {
-  ...some actions
-}, [reduxStateObject]);
