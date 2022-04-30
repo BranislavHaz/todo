@@ -18,7 +18,7 @@ export const { setItems } = globalSlice.actions;
 
 export default globalSlice.reducer;
 
-// Post Name of List
+// Post a list name
 export const postNameList = createAsyncThunk(
   "global/postNameList",
   async (data) => {
@@ -37,7 +37,7 @@ export const postNameList = createAsyncThunk(
   }
 );
 
-// Load To Do Items
+// Load todo items
 export const getToDoItems = (id) => {
   return async (dispatch) => {
     const response = await fetch(
