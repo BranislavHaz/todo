@@ -85,3 +85,38 @@ export const postTodoItem = (id, data) => {
       );
   };
 };
+
+// Put a todo item
+export const editTodoItem = (idList, idTodo) => {
+  return (dispatch) => {
+    axios
+      .put(
+        `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${idList}/todolist/${idTodo}`,
+        { isCompleted: true }
+      )
+      .then(
+        axios
+          .get(
+            `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${idList}/todolist`
+          )
+          .then((resp) => dispatch(setItems(resp.data)))
+      );
+  };
+};
+
+// Delete a todo item
+export const deleteTodoItem = (idList, idTodo) => {
+  return (dispatch) => {
+    axios
+      .delete(
+        `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${idList}/todolist/${idTodo}`
+      )
+      .then(
+        axios
+          .get(
+            `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${idList}/todolist`
+          )
+          .then((resp) => dispatch(setItems(resp.data)))
+      );
+  };
+};
