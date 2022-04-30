@@ -1,6 +1,6 @@
 import React from "react";
 
-const ToDoItem = ({ data }) => {
+const TodoItem = ({ data }) => {
   const date = new Date(data.deadline).toLocaleString();
   // const date = new Date(todo.deadline).toLocaleDateString();
   // const date = new Date(todo.deadline).toLocaleTimeString();
@@ -15,4 +15,4 @@ const ToDoItem = ({ data }) => {
   );
 };
 
-export default ToDoItem;
+export default TodoItem;

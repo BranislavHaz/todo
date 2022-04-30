@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
-import { postToDoItem, getToDoItems } from "../redux/globalSlice";
+import { postTodoItem, getTodoItems } from "../redux/todoSlice";
 
 const schema = yup.object().shape({
   title: yup
@@ -23,7 +23,7 @@ const schema = yup.object().shape({
     .typeError("Vyplňte prosím dátum deadlinu."),
 });
 
-const AddToDoForm = () => {
+const AddTodoItem = () => {
   const formRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -37,8 +37,8 @@ const AddToDoForm = () => {
 
   const onSubmit = (data) => {
     formRef.current.reset();
-    dispatch(postToDoItem(1, data));
-    dispatch(getToDoItems(1));
+    dispatch(postTodoItem(1, data));
+    dispatch(getTodoItems(1));
   };
 
   return (
@@ -54,4 +54,4 @@ const AddToDoForm = () => {
   );
 };
 
-export default AddToDoForm;
+export default AddTodoItem;

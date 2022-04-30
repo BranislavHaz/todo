@@ -1,26 +1,29 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getTodoItems } from "../redux/todoSlice";
 
-import ToDoItem from "./ToDoItem";
+import TodoItem from "./TodoItem";
 
-const ToDoList = () => {
-  const { todos } = useSelector((state) => state.global);
+const TodoList = () => {
+  const dispatch = useDispatch();
+  const { todo } = useSelector((state) => state.todo);
 
   useEffect(() => {
-    console.log("hello");
-  }, [todos]);
+    dispatch(getTodoItems(1));
+  }, [dispatch]);
 
   return (
     <div>
       <h1>Active</h1>
-      {todos
+      {todo
         ?.filter((todo) => !todo.isCompleted)
         .sort((a, b) => (a.deadline < b.deadline ? 1 : -1))
         .map((todo, id) => {
-          return <ToDoItem key={id} data={todo} />;
+          return <TodoItem key={id} data={todo} />;
         })}
     </div>
   );
 };
 
-export default ToDoList;
+export default TodoList;

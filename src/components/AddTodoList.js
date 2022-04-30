@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
-import { postNameList } from "../redux/globalSlice";
+import { postTodoList } from "../redux/todoSlice";
 
 const schema = yup.object().shape({
   name: yup
@@ -13,7 +13,7 @@ const schema = yup.object().shape({
     .required("Toto pole je povinné."),
 });
 
-const AddListForm = () => {
+const AddTodoList = () => {
   const formRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ const AddListForm = () => {
   });
 
   const onSubmit = (data) => {
-    dispatch(postNameList(data.name));
+    dispatch(postTodoList(data.name));
     formRef.current.reset();
   };
 
@@ -41,4 +41,4 @@ const AddListForm = () => {
   );
 };
 
-export default AddListForm;
+export default AddTodoList;
