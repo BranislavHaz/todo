@@ -6,7 +6,7 @@ import { getTodoItems, setUrlParams } from "../redux/todoSlice";
 
 import TodoItem from "./TodoItem";
 
-const TodoList = () => {
+const TodoList = ({ filter }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { todoList } = useSelector((state) => state.todo);
@@ -18,13 +18,16 @@ const TodoList = () => {
 
   return (
     <div>
-      <h1>{id}</h1>
-      {todoList
-        ?.filter((todo) => !todo.isCompleted)
-        .sort((a, b) => (a.deadline < b.deadline ? 1 : -1))
-        .map((todo, id) => {
-          return <TodoItem key={id} data={todo} />;
-        })}
+      {filter === "all" &&
+        todoList?.map((todo, id) => <TodoItem key={id} data={todo} />)}
+      {filter === "active" &&
+        todoList
+          ?.filter((todo) => !todo.isCompleted)
+          .map((todo, id) => <TodoItem key={id} data={todo} />)}
+      {filter === "done" &&
+        todoList
+          ?.filter((todo) => todo.isCompleted)
+          .map((todo, id) => <TodoItem key={id} data={todo} />)}
     </div>
   );
 };

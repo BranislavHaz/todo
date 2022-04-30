@@ -1,7 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import AddTodoList from "./components/AddTodoList";
 import AddTodoItem from "./components/AddTodoItem";
-import TodoList from "./components/TodoList";
+//import TodoList from "./components/TodoList";
+import Dashboard from "./layout/Dashboard";
 import Navbar from "./layout/Navbar";
 import "./App.css";
 
@@ -13,10 +14,11 @@ function App() {
         <AddTodoList />
         <AddTodoItem />
         <Navbar />
+        <Dashboard />
       </div>
-      <Routes>
+      {/*       <Routes>
         <Route path="/todolist/:id" element={<TodoList />} />
-      </Routes>
+      </Routes> */}
     </Router>
   );
 }
