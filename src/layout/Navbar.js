@@ -14,8 +14,12 @@ const Navbar = () => {
 
   return (
     <nav>
-      {list?.map((el) => {
-        return <Link to={`/todolist/${el.id}`}>{el.name}</Link>;
+      {list?.map((el, id) => {
+        return (
+          <Link key={id} to={`/todolist/${el.id}`}>
+            {el.name}
+          </Link>
+        );
       })}
     </nav>
   );

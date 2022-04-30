@@ -14,7 +14,7 @@ const TodoList = () => {
   useEffect(() => {
     dispatch(getTodoItems(id));
     dispatch(setUrlParams(+id));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <div>

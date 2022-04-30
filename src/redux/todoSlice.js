@@ -50,9 +50,15 @@ export const getTodoItems = (id) => {
 // Post a list name
 export const postTodoList = (data) => {
   return (dispatch) => {
-    axios.post("https://626abc396a86cd64adb203dd.mockapi.io/api/list", {
-      name: data,
-    });
+    axios
+      .post("https://626abc396a86cd64adb203dd.mockapi.io/api/list", {
+        name: data,
+      })
+      .then(
+        axios
+          .get("https://626abc396a86cd64adb203dd.mockapi.io/api/list")
+          .then((resp) => dispatch(setList(resp.data)))
+      );
   };
 };
 
