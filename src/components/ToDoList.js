@@ -12,7 +12,7 @@ const TodoList = () => {
   const { todoList } = useSelector((state) => state.todo);
 
   useEffect(() => {
-    dispatch(getTodoItems(+id));
+    dispatch(getTodoItems(id));
     dispatch(setUrlParams(+id));
   }, [dispatch]);
 

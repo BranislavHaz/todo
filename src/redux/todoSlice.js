@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
+  list: null,
   todoList: null,
   urlParams: null,
 };
@@ -10,6 +11,9 @@ export const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
+    setList: (state, action) => {
+      state.list = action.payload;
+    },
     setItems: (state, action) => {
       state.todoList = action.payload;
     },
@@ -19,9 +23,18 @@ export const todoSlice = createSlice({
   },
 });
 
-export const { setItems, setUrlParams } = todoSlice.actions;
+export const { setList, setItems, setUrlParams } = todoSlice.actions;
 
 export default todoSlice.reducer;
+
+// Load todo list
+export const getTodoList = () => {
+  return (dispatch) => {
+    axios
+      .get(`https://626abc396a86cd64adb203dd.mockapi.io/api/list`)
+      .then((resp) => dispatch(setList(resp.data)));
+  };
+};
 
 // Load todo items
 export const getTodoItems = (id) => {
