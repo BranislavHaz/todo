@@ -1,34 +1,3 @@
-/* import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setItems } from "../redux/globalSlice";
-
-const ToDoList = () => {
-  const dispatch = useDispatch();
-  const { todos } = useSelector((state) => state.global);
-
-  useEffect(() => {
-    async function getToDoItems(id) {
-      const response = await fetch(
-        `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todos`
-      );
-      const data = await response.json();
-      dispatch(setItems(data));
-    }
-    getToDoItems(2);
-  }, [dispatch]);
-
-  return (
-    <div>
-      <h1>ahoj</h1>
-      {todos?.map((todo) => {
-        return <div>{todo.title}</div>;
-      })}
-    </div>
-  );
-};
-
-export default ToDoList; */
-
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getToDoItems } from "../redux/globalSlice";
@@ -38,7 +7,8 @@ const ToDoList = () => {
   const { todos } = useSelector((state) => state.global);
 
   useEffect(() => {
-    dispatch(getToDoItems(2));
+    // aj v AddToDoForm.js
+    dispatch(getToDoItems(1));
   }, [dispatch]);
 
   return (
@@ -62,3 +32,7 @@ const ToDoList = () => {
 };
 
 export default ToDoList;
+
+useEffect(() => {
+  ...some actions
+}, [reduxStateObject]);

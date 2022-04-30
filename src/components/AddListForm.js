@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { postNameList } from "../redux/globalSlice";
 
 const schema = yup.object().shape({
-  list: yup
+  name: yup
     .string()
     .min(1, "Zadajte minimálne 1 znak.")
     .max(20, "Maximálny povolený počet znakov je 20.")
@@ -14,7 +14,7 @@ const schema = yup.object().shape({
 });
 
 const AddListForm = () => {
-  const formRef = useRef();
+  const formRef = useRef(null);
   const dispatch = useDispatch();
 
   const {
@@ -26,15 +26,15 @@ const AddListForm = () => {
   });
 
   const onSubmit = (data) => {
-    dispatch(postNameList(data.list));
+    dispatch(postNameList(data.name));
     formRef.current.reset();
   };
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
-        <input type="text" {...register("list")} />
-        {errors.list && <span>{errors.list?.message}</span>}
+        <input type="text" {...register("name")} />
+        {errors.name && <span>{errors.name?.message}</span>}
         <input type="submit" />
       </form>
     </>

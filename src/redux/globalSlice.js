@@ -36,3 +36,19 @@ export const postNameList = (data) => {
     });
   };
 };
+
+// Post a todo item
+export const postToDoItem = (id, data) => {
+  return (dispatch) => {
+    axios.post(
+      `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todos`,
+      {
+        listId: id,
+        title: data.title,
+        text: data.text,
+        deadline: +new Date(data.deadline),
+        isCompleted: false,
+      }
+    );
+  };
+};
