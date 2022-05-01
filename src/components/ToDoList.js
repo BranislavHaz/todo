@@ -4,20 +4,28 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setUrlParams } from "../redux/globalSlice";
 import { getTodoList } from "../redux/todoSlice";
+import { setNotFound } from "../redux/errorSlice";
 
 import TodoItem from "./TodoItem";
+import NotExist from "./pages/NotExist";
 
 const TodoList = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { searchTerm, activeFilter } = useSelector((state) => state.global);
-  const { todoList } = useSelector((state) => state.todo);
-  const { loadItems } = useSelector((state) => state.error);
+  const { categoriesList, todoList } = useSelector((state) => state.todo);
+  const { loadCategories, loadItems, notFound } = useSelector(
+    (state) => state.error
+  );
 
   useEffect(() => {
     dispatch(getTodoList(id));
     dispatch(setUrlParams(+id));
-  }, [dispatch, id]);
+
+    categoriesList?.length >= id
+      ? dispatch(setNotFound(false))
+      : dispatch(setNotFound(true));
+  }, [dispatch, id, categoriesList]);
 
   const searchedItems = todoList?.filter((todo) => {
     if (!searchTerm) {
@@ -41,7 +49,8 @@ const TodoList = () => {
 
   return (
     <div>
-      {loadItems && "ajajaj vyskytla sa chybička"}
+      {((loadCategories || loadItems) && "ajajaj vyskytla sa chybička") ||
+        (notFound && <NotExist />)}
       {activeFilter === "all" && filteredItems(activeFilter)}
       {activeFilter === "active" && filteredItems(activeFilter)}
       {activeFilter === "done" && filteredItems(activeFilter)}

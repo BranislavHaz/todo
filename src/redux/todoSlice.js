@@ -4,8 +4,8 @@ import axios from "axios";
 const apiUrl = "https://626abc396a86cd64adb203dd.mockapi.io/api/list";
 
 const initialState = {
-  categoriesList: null,
-  todoList: null,
+  categoriesList: [],
+  todoList: [],
 };
 
 export const todoSlice = createSlice({
