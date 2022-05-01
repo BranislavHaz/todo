@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getTodoCategories } from "../redux/todoSlice";
+import AddTodoCategory from "../components/AddTodoCategory";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const Navbar = () => {
 
   return (
     <nav>
+      <AddTodoCategory />
       {categories?.map((el, id) => {
         return (
           <Link key={id} to={`/todolist/${el.id}`}>
