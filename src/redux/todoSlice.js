@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
+  searchTerm: null,
   list: null,
   todoList: null,
   urlParams: null,
@@ -11,6 +12,9 @@ export const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+    },
     setList: (state, action) => {
       state.list = action.payload;
     },
@@ -23,7 +27,8 @@ export const todoSlice = createSlice({
   },
 });
 
-export const { setList, setItems, setUrlParams } = todoSlice.actions;
+export const { setSearchTerm, setList, setItems, setUrlParams } =
+  todoSlice.actions;
 
 export default todoSlice.reducer;
 

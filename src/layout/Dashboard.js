@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import SearchTodoItems from "../components/SearchTodoItems";
 import TodoList from "../components/TodoList";
 
 const Dashboard = () => {
@@ -12,6 +13,7 @@ const Dashboard = () => {
 
   return (
     <>
+      <SearchTodoItems />
       <nav>
         <ul>
           <a onClick={handleClick} href="/">

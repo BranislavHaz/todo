@@ -9,23 +9,34 @@ import TodoItem from "./TodoItem";
 const TodoList = ({ filter }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { todoList } = useSelector((state) => state.todo);
+  const { searchTerm, todoList } = useSelector((state) => state.todo);
 
   useEffect(() => {
     dispatch(getTodoItems(id));
     dispatch(setUrlParams(+id));
   }, [dispatch, id]);
 
+  const filteredItems = todoList?.filter((todo) => {
+    if (!searchTerm) {
+      return todo;
+    } else {
+      console.log(todo.text);
+      return todo?.title.toLowerCase().includes(searchTerm);
+    }
+  });
+
+  console.log(filteredItems);
+
   return (
     <div>
       {filter === "all" &&
-        todoList?.map((todo, id) => <TodoItem key={id} data={todo} />)}
+        filteredItems?.map((todo, id) => <TodoItem key={id} data={todo} />)}
       {filter === "active" &&
-        todoList
+        filteredItems
           ?.filter((todo) => !todo.isCompleted)
           .map((todo, id) => <TodoItem key={id} data={todo} />)}
       {filter === "done" &&
-        todoList
+        filteredItems
           ?.filter((todo) => todo.isCompleted)
           .map((todo, id) => <TodoItem key={id} data={todo} />)}
     </div>
