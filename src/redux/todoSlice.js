@@ -4,52 +4,24 @@ import axios from "axios";
 const apiUrl = "https://626abc396a86cd64adb203dd.mockapi.io/api/list";
 
 const initialState = {
-  searchTerm: null,
-  categories: null,
+  categoriesList: null,
   todoList: null,
-  urlParams: null,
-  activeFilter: "all",
-  contentError: false,
-  modalError: false,
 };
 
 export const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
-    setSearchTerm: (state, action) => {
-      state.searchTerm = action.payload;
-    },
     setCategories: (state, action) => {
-      state.categories = action.payload;
+      state.categoriesList = action.payload;
     },
-    setItems: (state, action) => {
+    setTodo: (state, action) => {
       state.todoList = action.payload;
-    },
-    setUrlParams: (state, action) => {
-      state.urlParams = action.payload;
-    },
-    setActiveFilter: (state, action) => {
-      state.activeFilter = action.payload;
-    },
-    setContentError: (state, action) => {
-      state.contentError = action.payload;
-    },
-    setModalError: (state, action) => {
-      state.modalError = action.payload;
     },
   },
 });
 
-export const {
-  setSearchTerm,
-  setCategories,
-  setItems,
-  setUrlParams,
-  setActiveFilter,
-  setContentError,
-  setModalError,
-} = todoSlice.actions;
+export const { setCategories, setTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;
 
@@ -67,24 +39,16 @@ export const postTodoCategory = (data) => {
       .post(apiUrl, {
         name: data,
       })
-      .then(() => dispatch(getTodoCategories()))
-      .then(() => dispatch(setModalError(false)))
-      .catch(() => {
-        dispatch(setModalError(true));
-      });
+      .then(() => dispatch(getTodoCategories()));
   };
 };
 
 // Load todo items
-export const getTodoItems = (idList) => {
-  return (dispatch) => {
+export const getTodoList = (idList) => {
+  return (dispatch, getState) => {
     axios
       .get(`${apiUrl}/${idList}/todolist`)
-      .then((resp) => dispatch(setItems(resp.data)))
-      .then(() => dispatch(setContentError(false)))
-      .catch(() => {
-        dispatch(setContentError(true));
-      });
+      .then((resp) => dispatch(setTodo(resp.data)));
   };
 };
 
@@ -99,11 +63,7 @@ export const postTodoItem = (idList, data) => {
         deadline: +new Date(data.deadline),
         isCompleted: false,
       })
-      .then(() => dispatch(getTodoItems(idList)))
-      .then(() => dispatch(setModalError(false)))
-      .catch(() => {
-        dispatch(setModalError(true));
-      });
+      .then(() => dispatch(getTodoList(idList)));
   };
 };
 
@@ -112,11 +72,7 @@ export const editTodoItem = (idList, idTodo) => {
   return (dispatch) => {
     axios
       .put(`${apiUrl}/${idList}/todolist/${idTodo}`, { isCompleted: true })
-      .then(() => dispatch(getTodoItems(idList)))
-      .then(() => dispatch(setModalError(false)))
-      .catch(() => {
-        dispatch(setModalError(true));
-      });
+      .then(() => dispatch(getTodoList(idList)));
   };
 };
 
@@ -125,10 +81,6 @@ export const deleteTodoItem = (idList, idTodo) => {
   return (dispatch) => {
     axios
       .delete(`${apiUrl}/${idList}/todolist/${idTodo}`)
-      .then(() => dispatch(getTodoItems(idList)))
-      .then(() => dispatch(setModalError(false)))
-      .catch(() => {
-        dispatch(setModalError(true));
-      });
+      .then(() => dispatch(getTodoList(idList)));
   };
 };

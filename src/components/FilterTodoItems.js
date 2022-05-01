@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setActiveFilter } from "../redux/todoSlice";
+import { setActiveFilter } from "../redux/globalSlice";
 
 const FilterTodoItems = () => {
   const dispatch = useDispatch();

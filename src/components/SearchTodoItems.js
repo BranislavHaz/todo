@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setSearchTerm } from "../redux/todoSlice";
+import { setSearchTerm } from "../redux/globalSlice";
 
 const SearchTodoItems = () => {
   const dispatch = useDispatch();

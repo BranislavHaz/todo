@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { deleteTodoItem, editTodoItem } from "../redux/todoSlice";
 
 const TodoItem = ({ data }) => {
-  const { urlParams } = useSelector((state) => state.todo);
+  const { urlParams } = useSelector((state) => state.global);
   const dispatch = useDispatch();
   const date = new Date(data.deadline).toLocaleString();
   // const date = new Date(todo.deadline).toLocaleDateString();
@@ -16,6 +16,7 @@ const TodoItem = ({ data }) => {
 
   const handleEdit = (e) => {
     dispatch(editTodoItem(urlParams, e.target.id));
+    console.log(e.target + urlParams);
   };
 
   return (

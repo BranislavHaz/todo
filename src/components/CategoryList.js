@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const CategoryList = () => {
-  const { categories } = useSelector((state) => state.todo);
+  const { categoriesList } = useSelector((state) => state.todo);
+  const { loadCategories } = useSelector((state) => state.error);
 
   return (
     <>
-      {categories?.map((el, id) => {
+      {loadCategories && "Nenašli sa žiadné kategórie"}
+      {categoriesList?.map((el, id) => {
         return (
           <Link key={id} to={`/todolist/${el.id}`}>
             {el.name}

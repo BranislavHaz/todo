@@ -2,19 +2,20 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getTodoItems, setUrlParams } from "../redux/todoSlice";
+import { setUrlParams } from "../redux/globalSlice";
+import { getTodoList } from "../redux/todoSlice";
 
 import TodoItem from "./TodoItem";
 
 const TodoList = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { searchTerm, todoList, activeFilter, contentError } = useSelector(
-    (state) => state.todo
-  );
+  const { searchTerm, activeFilter } = useSelector((state) => state.global);
+  const { todoList } = useSelector((state) => state.todo);
+  const { loadItems } = useSelector((state) => state.error);
 
   useEffect(() => {
-    dispatch(getTodoItems(id));
+    dispatch(getTodoList(id));
     dispatch(setUrlParams(+id));
   }, [dispatch, id]);
 
@@ -40,7 +41,7 @@ const TodoList = () => {
 
   return (
     <div>
-      {contentError && "ajajaj vyskytla sa chybička"}
+      {loadItems && "ajajaj vyskytla sa chybička"}
       {activeFilter === "all" && filteredItems(activeFilter)}
       {activeFilter === "active" && filteredItems(activeFilter)}
       {activeFilter === "done" && filteredItems(activeFilter)}

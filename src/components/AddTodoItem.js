@@ -26,7 +26,7 @@ const schema = yup.object().shape({
 
 const AddTodoItem = () => {
   const formRef = useRef(null);
-  const { urlParams } = useSelector((state) => state.todo);
+  const { urlParams } = useSelector((state) => state.global);
   const dispatch = useDispatch();
 
   const {
