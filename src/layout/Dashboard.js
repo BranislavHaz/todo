@@ -1,34 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
+import FilterTodoItems from "../components/FilterTodoItems";
 import SearchTodoItems from "../components/SearchTodoItems";
+import Index from "../components/Index";
 import TodoList from "../components/TodoList";
+import NotExist from "../components/NotExist";
 
 const Dashboard = () => {
-  const [filter, setFilter] = useState("all");
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    setFilter(e.target.id);
-  };
-
   return (
     <>
       <SearchTodoItems />
-      <nav>
-        <ul>
-          <a onClick={handleClick} href="/">
-            <li id="all">Všetky</li>
-          </a>
-          <a onClick={handleClick} href="/">
-            <li id="active">Aktívne</li>
-          </a>
-          <a onClick={handleClick} href="/">
-            <li id="done">Dokončené</li>
-          </a>
-        </ul>
-      </nav>
+      <FilterTodoItems />
       <Routes>
-        <Route path="/todolist/:id" element={<TodoList filter={filter} />} />
+        <Route path="/" element={<Index />} />
+        <Route path="/todolist/:id" element={<TodoList />} />
+        <Route path="*" element={<NotExist />} />
       </Routes>
     </>
   );

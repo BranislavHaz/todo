@@ -6,6 +6,7 @@ const initialState = {
   list: null,
   todoList: null,
   urlParams: null,
+  activeFilter: "all",
 };
 
 export const todoSlice = createSlice({
@@ -24,11 +25,19 @@ export const todoSlice = createSlice({
     setUrlParams: (state, action) => {
       state.urlParams = action.payload;
     },
+    setActiveFilter: (state, action) => {
+      state.activeFilter = action.payload;
+    },
   },
 });
 
-export const { setSearchTerm, setList, setItems, setUrlParams } =
-  todoSlice.actions;
+export const {
+  setSearchTerm,
+  setList,
+  setItems,
+  setUrlParams,
+  setActiveFilter,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;
 
