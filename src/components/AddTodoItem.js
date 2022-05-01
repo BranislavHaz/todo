@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { postTodoItem, getTodoItems } from "../redux/todoSlice";
+import { postTodoItem } from "../redux/todoSlice";
 
 const schema = yup.object().shape({
   title: yup
@@ -41,7 +41,6 @@ const AddTodoItem = () => {
   const onSubmit = (data) => {
     formRef.current.reset();
     dispatch(postTodoItem(urlParams, data));
-    dispatch(getTodoItems(urlParams));
     reset();
   };
 

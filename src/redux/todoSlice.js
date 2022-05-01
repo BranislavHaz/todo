@@ -51,11 +51,11 @@ export const getTodoList = () => {
 };
 
 // Load todo items
-export const getTodoItems = (id) => {
+export const getTodoItems = (idList) => {
   return (dispatch) => {
     axios
       .get(
-        `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todolist`
+        `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${idList}/todolist`
       )
       .then((resp) => dispatch(setItems(resp.data)));
   };
@@ -68,35 +68,25 @@ export const postTodoList = (data) => {
       .post("https://626abc396a86cd64adb203dd.mockapi.io/api/list", {
         name: data,
       })
-      .then(
-        axios
-          .get("https://626abc396a86cd64adb203dd.mockapi.io/api/list")
-          .then((resp) => dispatch(setList(resp.data)))
-      );
+      .then(() => dispatch(getTodoList()));
   };
 };
 
 // Post a todo item
-export const postTodoItem = (id, data) => {
+export const postTodoItem = (idList, data) => {
   return (dispatch) => {
     axios
       .post(
-        `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todolist`,
+        `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${idList}/todolist`,
         {
-          listId: id,
+          listId: idList,
           title: data.title,
           text: data.text,
           deadline: +new Date(data.deadline),
           isCompleted: false,
         }
       )
-      .then(
-        axios
-          .get(
-            `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${id}/todolist`
-          )
-          .then((resp) => dispatch(setItems(resp.data)))
-      );
+      .then(() => dispatch(getTodoItems(idList)));
   };
 };
 
@@ -108,13 +98,7 @@ export const editTodoItem = (idList, idTodo) => {
         `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${idList}/todolist/${idTodo}`,
         { isCompleted: true }
       )
-      .then(
-        axios
-          .get(
-            `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${idList}/todolist`
-          )
-          .then((resp) => dispatch(setItems(resp.data)))
-      );
+      .then(() => dispatch(getTodoItems(idList)));
   };
 };
 
@@ -125,12 +109,6 @@ export const deleteTodoItem = (idList, idTodo) => {
       .delete(
         `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${idList}/todolist/${idTodo}`
       )
-      .then(
-        axios
-          .get(
-            `https://626abc396a86cd64adb203dd.mockapi.io/api/list/${idList}/todolist`
-          )
-          .then((resp) => dispatch(setItems(resp.data)))
-      );
+      .then(() => dispatch(getTodoItems(idList)));
   };
 };

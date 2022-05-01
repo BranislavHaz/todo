@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
-import { postTodoList, getTodoList } from "../redux/todoSlice";
+import { postTodoList } from "../redux/todoSlice";
 
 const schema = yup.object().shape({
   name: yup
@@ -28,7 +28,6 @@ const AddTodoList = () => {
 
   const onSubmit = (data) => {
     dispatch(postTodoList(data.name));
-    dispatch(getTodoList());
     reset();
     formRef.current.reset();
   };

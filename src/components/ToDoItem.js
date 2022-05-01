@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { deleteTodoItem, getTodoItems, editTodoItem } from "../redux/todoSlice";
+import { deleteTodoItem, editTodoItem } from "../redux/todoSlice";
 
 const TodoItem = ({ data }) => {
   const { urlParams } = useSelector((state) => state.todo);
@@ -12,12 +12,10 @@ const TodoItem = ({ data }) => {
 
   const handleDelete = (e) => {
     dispatch(deleteTodoItem(urlParams, e.target.id));
-    dispatch(getTodoItems(urlParams));
   };
 
   const handleEdit = (e) => {
     dispatch(editTodoItem(urlParams, e.target.id));
-    dispatch(getTodoItems(urlParams));
   };
 
   return (
