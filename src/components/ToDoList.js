@@ -9,7 +9,7 @@ import TodoItem from "./TodoItem";
 const TodoList = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { searchTerm, todoList, activeFilter } = useSelector(
+  const { searchTerm, todoList, activeFilter, contentError } = useSelector(
     (state) => state.todo
   );
 
@@ -40,6 +40,7 @@ const TodoList = () => {
 
   return (
     <div>
+      {contentError && "ajajaj vyskytla sa chybička"}
       {activeFilter === "all" && filteredItems(activeFilter)}
       {activeFilter === "active" && filteredItems(activeFilter)}
       {activeFilter === "done" && filteredItems(activeFilter)}

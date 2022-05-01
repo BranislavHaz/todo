@@ -13,7 +13,7 @@ const schema = yup.object().shape({
     .required("Toto pole je povinné."),
 });
 
-const AddTodoList = () => {
+const AddTodoCategory = () => {
   const formRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -43,4 +43,4 @@ const AddTodoList = () => {
   );
 };
 
-export default AddTodoList;
+export default AddTodoCategory;

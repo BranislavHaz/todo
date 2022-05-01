@@ -2,9 +2,9 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import FilterTodoItems from "../components/FilterTodoItems";
 import SearchTodoItems from "../components/SearchTodoItems";
-import Index from "../components/Index";
+import Index from "../components/pages/Index";
 import TodoList from "../components/TodoList";
-import NotExist from "../components/NotExist";
+import NotExist from "../components/pages/NotExist";
 
 const Dashboard = () => {
   return (
