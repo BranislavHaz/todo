@@ -2,19 +2,19 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getTodoList } from "../redux/todoSlice";
+import { getTodoCategories } from "../redux/todoSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { list } = useSelector((state) => state.todo);
+  const { categories } = useSelector((state) => state.todo);
 
   useEffect(() => {
-    dispatch(getTodoList());
+    dispatch(getTodoCategories());
   }, [dispatch]);
 
   return (
     <nav>
-      {list?.map((el, id) => {
+      {categories?.map((el, id) => {
         return (
           <Link key={id} to={`/todolist/${el.id}`}>
             {el.name}
