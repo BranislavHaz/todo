@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import FilterTodoItems from "../components/FilterTodoItems";
@@ -11,13 +11,22 @@ import Error from "../components/pages/Error";
 import { DashboardWrap } from "./Dashboard.styled";
 
 const Dashboard = () => {
-  const { urlParams } = useSelector((state) => state.global);
-  const { showAddTodoForm } = useSelector((state) => state.todo);
+  const { todoList, showAddTodoForm } = useSelector((state) => state.todo);
+
+  const isCorrect = useMemo(() => {
+    let isCorrect = true;
+    !todoList?.length && (isCorrect = false);
+    return isCorrect;
+  }, [todoList]);
 
   return (
     <DashboardWrap>
-      {urlParams && <SearchTodoItems />}
-      {urlParams && <FilterTodoItems />}
+      {isCorrect && (
+        <>
+          <SearchTodoItems />
+          <FilterTodoItems />
+        </>
+      )}
       {showAddTodoForm && <AddTodoItem />}
       <Routes>
         <Route path="/" element={<Index />} />
