@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
-export const Navigation = styled.nav`
+export const CategoryListWrap = styled.nav`
   min-height: 80vh;
 `;
 
-export const List = styled.ul`
+export const CategoryListUl = styled.ul`
   margin-top: 0.5em;
 `;
 
-export const ListItem = styled.li`
+export const CategoryItem = styled.li`
   width: 100%;
   margin: 0.8em 0;
   display: flex;
@@ -21,7 +21,7 @@ export const ListItem = styled.li`
   }
 `;
 
-export const DeleteItem = styled.img`
+export const DeleteCategory = styled.img`
   width: 1em;
   height: 1em;
   margin-right: 0.5em;
@@ -30,9 +30,4 @@ export const DeleteItem = styled.img`
   &:hover {
     filter: grayscale(0.5);
   }
-`;
-
-export const Title = styled.h3`
-  margin-top: 2em;
-  position: relative;
 `;
