@@ -11,9 +11,7 @@ const SearchTodoItems = () => {
     dispatch(setSearchTerm(e.target.value.toLowerCase()));
   };
 
-  return (
-    <SearchBar onChange={handleChange} type="text" placeholder="Hľadať..." />
-  );
+  return <SearchBar onChange={handleChange} placeholder="Hľadať..." />;
 };
 
 export default SearchTodoItems;

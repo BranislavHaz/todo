@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SearchBar = styled.input`
+export const SearchBar = styled.input.attrs({ type: "search" })`
   width: 50%;
   height: 4em;
   margin: 0 auto;
