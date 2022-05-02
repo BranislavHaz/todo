@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
 
@@ -8,9 +8,7 @@ const Layout = () => {
   return (
     <Main>
       <Navbar />
-      <Suspense fallback={<p>loading...</p>}>
-        <Dashboard />
-      </Suspense>
+      <Dashboard />
     </Main>
   );
 };

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const AddCategoryForm = styled.form`
   margin-top: 2em;
@@ -8,6 +8,26 @@ export const AddCategoryForm = styled.form`
 
 export const AddCategoryInput = styled.input.attrs({ type: "text" })`
   width: 70%;
+  border-color: ${(props) => props.state === "error" && "red"};
+  animation: ${(props) => props.state === "error" && Error} 0.15s 3 backwards;
+
+  &:focus {
+    border-color: ${(props) => props.state === "error" && "red"};
+  }
+
+  &::placeholder {
+    color: ${(props) => props.state === "error" && "red"};
+  }
+`;
+
+export const Error = keyframes`
+
+  25% {
+    transform: rotate(1deg);
+  }
+  75% {
+    transform: rotate(-1deg);
+  }
 `;
 
 export const AddCategorySubmit = styled.input.attrs({ type: "submit" })`

@@ -7,7 +7,9 @@ import { postTodoCategory } from "../redux/todoSlice";
 
 import {
   AddCategoryForm,
+  InputWrap,
   AddCategoryInput,
+  ErrorMessage,
   AddCategorySubmit,
 } from "./AddTodoCategory.styled";
 
@@ -41,8 +43,11 @@ const AddTodoCategory = () => {
   return (
     <>
       <AddCategoryForm onSubmit={handleSubmit(onSubmit)} ref={formRef}>
-        <AddCategoryInput {...register("name")} />
-        {errors.name && <span>{errors.name?.message}</span>}
+        <AddCategoryInput
+          {...register("name")}
+          placeholder={errors.name && errors.name?.message}
+          state={errors.name && "error"}
+        />
         <AddCategorySubmit />
       </AddCategoryForm>
     </>

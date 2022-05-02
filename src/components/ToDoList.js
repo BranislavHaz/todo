@@ -10,7 +10,7 @@ import TodoError from "./TodoError";
 
 import { TodoListWrap, AddTodoButton } from "./TodoList.styled";
 
-const TodoList = () => {
+const TodoList = ({ isCorrect }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { searchTerm, activeFilter } = useSelector((state) => state.global);
@@ -51,7 +51,7 @@ const TodoList = () => {
 
   return (
     <TodoListWrap>
-      <AddTodoButton onClick={handleClick} />
+      {isCorrect && <AddTodoButton onClick={handleClick} />}
       {errors.todoError ? <TodoError /> : filteredItems(activeFilter)}
     </TodoListWrap>
   );

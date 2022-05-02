@@ -54,7 +54,7 @@ const TodoItem = ({ data }) => {
         </TodoItemColumn>
         <TodoItemColumn>
           <ActionItem
-            src={data.isCompleted ? incompleteIcon : doneIcon}
+            src={data.isCompleted ? doneIcon : incompleteIcon}
             id={data.id}
             onClick={handleEdit}
           />

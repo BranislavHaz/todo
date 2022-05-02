@@ -70,10 +70,10 @@ export const postTodoCategory = (data) => {
 
 // Delete todo category
 export const deleteTodoCategory = (idList) => {
-  return (dispatch) => {
-    axios
-      .delete(`${apiUrl}/${idList}`)
-      .then(() => dispatch(getTodoCategories()));
+  return (dispatch, getState) => {
+    axios.delete(`${apiUrl}/${idList}`).then(() => {
+      dispatch(getTodoCategories());
+    });
   };
 };
 

@@ -15,7 +15,7 @@ export const ErrorMessageImg = styled.img`
 `;
 
 export const ErrorMessageText = styled.p`
-  margin-top: 0.8em;
+  margin-top: 0.4em;
   color: #b9c2c3;
   text-align: center;
 

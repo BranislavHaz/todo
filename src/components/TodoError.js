@@ -13,7 +13,9 @@ const TodoError = () => {
     <ErrorMessage>
       <ErrorMessageImg src={searchingImg}></ErrorMessageImg>
       <ErrorMessageText>Hľadám, hľadám ale nič.</ErrorMessageText>
-      <ErrorMessageText>Radšej tam niečo pridaj.</ErrorMessageText>
+      <ErrorMessageText>
+        Vyber si zo zonamu kategórií, alebo nejakú novú jednoducho pridaj.{" "}
+      </ErrorMessageText>
       <ErrorMessageText>
         Nefunguje? Ojoj, pravdepodobne bude chyba na strane servera, ale klamal
         by som keby tvrdím, že už na tom pracujem.

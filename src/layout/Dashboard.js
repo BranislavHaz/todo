@@ -30,7 +30,10 @@ const Dashboard = () => {
       {showAddTodoForm && <AddTodoItem />}
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/todolist/:id" element={<TodoList />} />
+        <Route
+          path="/todolist/:id"
+          element={<TodoList isCorrect={isCorrect} />}
+        />
         <Route path="*" element={<Error />} />
       </Routes>
     </DashboardWrap>

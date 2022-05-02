@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const AddTodoWrap = styled.div`
   width: 100vw;
@@ -48,16 +48,44 @@ export const InputWrap = styled.div`
 
 export const InputTodoTitle = styled.input.attrs({ type: "text" })`
   width: 100%;
+  border-color: ${(props) => props.state === "error" && "red"};
+  animation: ${(props) => props.state === "error" && Error} 0.15s 3 backwards;
+
+  &:focus {
+    border-color: ${(props) => props.state === "error" && "red"};
+  }
 `;
 
 export const InputTodoText = styled.textarea`
   width: 100%;
   height: 8em;
+  border-color: ${(props) => props.state === "error" && "red"};
+  animation: ${(props) => props.state === "error" && Error} 0.15s 3 backwards;
+
+  &:focus {
+    border-color: ${(props) => props.state === "error" && "red"};
+  }
 `;
 
 export const InputTodoDate = styled.input.attrs({ type: "datetime-local" })`
   width: 100%;
   text-align: center;
+  border-color: ${(props) => props.state === "error" && "red"};
+  animation: ${(props) => props.state === "error" && Error} 0.15s 3 backwards;
+
+  &:focus {
+    border-color: ${(props) => props.staty === "error" && "red"};
+  }
+`;
+
+export const Error = keyframes`
+
+  25% {
+    transform: translateX(0.5em);
+  }
+  75% {
+    transform: translate(-0.5em);
+  }
 `;
 
 export const InputTodoSubmit = styled.input.attrs({ type: "submit" })`
@@ -87,8 +115,8 @@ export const ErrorMessage = styled.span`
 `;
 
 export const CloseTodoForm = styled.img`
-  width: 2em;
-  height: 2em;
+  width: 1.5em;
+  height: 1.5em;
   position: absolute;
   top: 1.5em;
   right: 1.5em;

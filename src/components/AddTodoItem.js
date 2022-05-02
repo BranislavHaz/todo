@@ -18,7 +18,7 @@ import {
   ErrorMessage,
 } from "./AddTodoItem.styled";
 
-import closeIcon from "../img/close.png";
+import deleteIcon from "../img/delete-category.png";
 
 const schema = yup.object().shape({
   title: yup
@@ -50,6 +50,7 @@ const AddTodoItem = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    reValidateMode: "onSubmit",
   });
 
   const onSubmit = (data) => {
@@ -71,7 +72,11 @@ const AddTodoItem = () => {
         id="add-todo-item"
       >
         <InputWrap>
-          <InputTodoTitle placeholder="Názov úlohy" {...register("title")} />
+          <InputTodoTitle
+            placeholder="Názov úlohy"
+            {...register("title")}
+            state={errors.title && "error"}
+          />
           {errors.title && <ErrorMessage>{errors.title?.message}</ErrorMessage>}
         </InputWrap>
         <InputWrap>
@@ -79,17 +84,21 @@ const AddTodoItem = () => {
             placeholder="Podrobný popis úlohy"
             form="add-todo-item"
             {...register("text")}
+            state={errors.text && "error"}
           />
           {errors.text && <ErrorMessage>{errors.text?.message}</ErrorMessage>}
         </InputWrap>
         <InputWrap>
-          <InputTodoDate {...register("deadline")} />
+          <InputTodoDate
+            state={errors.deadline && "error"}
+            {...register("deadline")}
+          />
           {errors.deadline && (
             <ErrorMessage>{errors.deadline?.message}</ErrorMessage>
           )}
         </InputWrap>
         <InputTodoSubmit />
-        <CloseTodoForm src={closeIcon} onClick={handleClick} />
+        <CloseTodoForm src={deleteIcon} onClick={handleClick} />
       </AddTodoForm>
     </AddTodoWrap>
   );
