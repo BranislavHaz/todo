@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 export const AddCategoryForm = styled.form``;
 
-export const AddCategoryInput = styled.input.attrs({ type: "text" })``;
+export const AddCategoryInput = styled.input.attrs({ type: "text" })`
+  width: 70%;
+`;
 
 export const AddCategorySubmit = styled.input.attrs({ type: "submit" })`
   margin-left: 0.4em;
