@@ -4,7 +4,21 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { postTodoItem } from "../redux/todoSlice";
+import { postTodoItem, showAddTodoForm } from "../redux/todoSlice";
+
+import {
+  AddTodoWrap,
+  CloseTodoForm,
+  AddTodoForm,
+  InputWrap,
+  InputTodoTitle,
+  InputTodoText,
+  InputTodoDate,
+  InputTodoSubmit,
+  ErrorMessage,
+} from "./AddTodoItem.styled";
+
+import closeIcon from "../img/close.png";
 
 const schema = yup.object().shape({
   title: yup
@@ -42,18 +56,42 @@ const AddTodoItem = () => {
     formRef.current.reset();
     dispatch(postTodoItem(urlParams, data));
     reset();
+    dispatch(showAddTodoForm(false));
+  };
+
+  const handleClick = () => {
+    dispatch(showAddTodoForm(false));
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
-      <input type="text" {...register("title")} />
-      {errors.title && <span>{errors.title?.message}</span>}
-      <input type="text" {...register("text")} />
-      {errors.text && <span>{errors.text?.message}</span>}
-      <input type="datetime-local" {...register("deadline")} />
-      {errors.deadline && <span>{errors.deadline?.message}</span>}
-      <input type="submit" />
-    </form>
+    <AddTodoWrap>
+      <AddTodoForm
+        onSubmit={handleSubmit(onSubmit)}
+        ref={formRef}
+        id="add-todo-item"
+      >
+        <InputWrap>
+          <InputTodoTitle placeholder="Názov úlohy" {...register("title")} />
+          {errors.title && <ErrorMessage>{errors.title?.message}</ErrorMessage>}
+        </InputWrap>
+        <InputWrap>
+          <InputTodoText
+            placeholder="Podrobný popis úlohy"
+            form="add-todo-item"
+            {...register("text")}
+          />
+          {errors.text && <ErrorMessage>{errors.text?.message}</ErrorMessage>}
+        </InputWrap>
+        <InputWrap>
+          <InputTodoDate {...register("deadline")} />
+          {errors.deadline && (
+            <ErrorMessage>{errors.deadline?.message}</ErrorMessage>
+          )}
+        </InputWrap>
+        <InputTodoSubmit />
+        <CloseTodoForm src={closeIcon} onClick={handleClick} />
+      </AddTodoForm>
+    </AddTodoWrap>
   );
 };
 

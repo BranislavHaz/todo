@@ -4,6 +4,8 @@ import { getTodoCategories } from "../redux/todoSlice";
 import AddTodoCategory from "../components/AddTodoCategory";
 import CategoryList from "../components/CategoryList";
 
+import { Header } from "./Navbar.styled";
+
 const Navbar = () => {
   const dispatch = useDispatch();
 
@@ -12,10 +14,10 @@ const Navbar = () => {
   }, [dispatch]);
 
   return (
-    <nav>
+    <Header>
       <AddTodoCategory />
       <CategoryList />
-    </nav>
+    </Header>
   );
 };
 

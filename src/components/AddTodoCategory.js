@@ -5,6 +5,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { postTodoCategory } from "../redux/todoSlice";
 
+import {
+  AddCategoryForm,
+  AddCategoryInput,
+  AddCategorySubmit,
+} from "./AddTodoCategory.styled";
+
 const schema = yup.object().shape({
   name: yup
     .string()
@@ -34,11 +40,11 @@ const AddTodoCategory = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
-        <input type="text" {...register("name")} />
+      <AddCategoryForm onSubmit={handleSubmit(onSubmit)} ref={formRef}>
+        <AddCategoryInput {...register("name")} />
         {errors.name && <span>{errors.name?.message}</span>}
-        <input type="submit" />
-      </form>
+        <AddCategorySubmit />
+      </AddCategoryForm>
     </>
   );
 };

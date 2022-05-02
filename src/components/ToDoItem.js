@@ -1,37 +1,67 @@
-import React from "react";
+import React, { Suspense, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { deleteTodoItem, editTodoItem } from "../redux/todoSlice";
 
+import {
+  TodoItemWrap,
+  TodoItemColumn,
+  ActionItem,
+  DeadlineTodo,
+  TitleTodo,
+  TextTodo,
+} from "./TodoItem.styled";
+
+import deleteIcon from "../img/delete.png";
+import doneIcon from "../img/done.png";
+import incompleteIcon from "../img/incomplete.png";
+
 const TodoItem = ({ data }) => {
   const { urlParams } = useSelector((state) => state.global);
+  const { todoFilter } = useSelector((state) => state.todo);
   const dispatch = useDispatch();
   const date = new Date(data.deadline).toLocaleString();
   // const date = new Date(todo.deadline).toLocaleDateString();
   // const date = new Date(todo.deadline).toLocaleTimeString();
+  const [isDeleted, setIsDeleted] = useState(false);
+  const [isDone, setIsDone] = useState(false);
 
   const handleDelete = (e) => {
     dispatch(deleteTodoItem(urlParams, e.target.id));
+    setIsDeleted(true);
+    setTimeout(() => {
+      setIsDeleted(false);
+    }, [500]);
   };
 
   const handleEdit = (e) => {
     dispatch(editTodoItem(urlParams, e.target.id));
-    console.log(e.target + urlParams);
+    if (todoFilter === "active") {
+      setIsDone(true);
+      setTimeout(() => {
+        setIsDone(false);
+      }, [500]);
+    }
   };
 
   return (
-    <div className="ano">
-      <p>{data.id}</p>
-      <h1>{data.title}</h1>
-      <p>{data.text}</p>
-      <p>{date}</p>
-      <button id={data.id} onClick={handleEdit}>
-        dokončené
-      </button>
-      <button id={data.id} onClick={handleDelete}>
-        vymazať
-      </button>
-    </div>
+    <Suspense fallback={<p>loading...</p>}>
+      <TodoItemWrap state={(isDeleted && "delete") || (isDone && "done")}>
+        <TodoItemColumn>
+          <DeadlineTodo>{date}</DeadlineTodo>
+          <TitleTodo>{data.title}</TitleTodo>
+          <TextTodo>{data.text}</TextTodo>
+        </TodoItemColumn>
+        <TodoItemColumn>
+          <ActionItem
+            src={data.isCompleted ? incompleteIcon : doneIcon}
+            id={data.id}
+            onClick={handleEdit}
+          />
+          <ActionItem src={deleteIcon} id={data.id} onClick={handleDelete} />
+        </TodoItemColumn>
+      </TodoItemWrap>
+    </Suspense>
   );
 };
 

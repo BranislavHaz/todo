@@ -1,13 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
 
+import { Main } from "./Layout.styled";
+
 const Layout = () => {
   return (
-    <div>
+    <Main>
       <Navbar />
-      <Dashboard />
-    </div>
+      <Suspense fallback={<p>loading...</p>}>
+        <Dashboard />
+      </Suspense>
+    </Main>
   );
 };
 

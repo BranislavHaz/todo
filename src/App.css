@@ -1,5 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap");
+
+/* Variables */
+:root {
+  --font: "Poppins", sans-serif;
+
+  --primary-text-color: #383c4b;
+  --secondary-text-color: #9f9f9f;
+
+  --border-radius: 25px;
+  --box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+
+  --transition-light: all 0.1s linear;
+
+  --input-border: 1px solid #e9eff0;
+  --input-border-focus: 1px solid #d0d6d7;
+  --input-border-radius: 7px;
+  --input-height: 2.5em;
+
+  --btn-bg-color: #ff7562;
+  --btn-bg-color-hover: #f3705e;
+}
+
+/* Reset Settings */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
+/* Global Styles */
+body {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6fafb;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--primary-text-color);
+  text-decoration: none;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+input,
+textarea {
+  height: var(--input-height);
+  padding: 0.3em;
+  border: var(--input-border);
+  border-radius: var(--input-border-radius);
+  font-family: var(--font);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: var(--input-border-focus);
+}
+
+/* Breakpoints */
+/*
+breakpoint-mobile: 320px;
+breakpoint-tablet: 481px;
+breakpoint-laptop: 769px;
+breakpoint-desktop: 1025px;
+breakpoint-extra-large: 1201px;
+*/

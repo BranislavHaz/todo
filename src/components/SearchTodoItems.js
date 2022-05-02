@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { setSearchTerm } from "../redux/globalSlice";
 
+import { SearchBar } from "./SearchTodoItems.styled";
+
 const SearchTodoItems = () => {
   const dispatch = useDispatch();
 
@@ -10,9 +12,7 @@ const SearchTodoItems = () => {
   };
 
   return (
-    <>
-      <input onChange={handleChange} type="text" />
-    </>
+    <SearchBar onChange={handleChange} type="text" placeholder="Hľadať..." />
   );
 };
 
