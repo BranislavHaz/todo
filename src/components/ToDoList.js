@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setUrlParams } from "../redux/globalSlice";
-import { getTodoList, setFilter, showAddTodoForm } from "../redux/todoSlice";
+import { getTodoList, showAddTodoForm } from "../redux/todoSlice";
 
 import TodoItem from "./TodoItem";
-import NotExist from "./pages/NotExist";
+import TodoError from "./TodoError";
 
 import { TodoListWrap, AddTodoButton } from "./TodoList.styled";
 
@@ -14,12 +14,7 @@ const TodoList = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { searchTerm, activeFilter } = useSelector((state) => state.global);
-  const { categoriesList, todoList } = useSelector((state) => state.todo);
-
-  /*   useEffect(() => {
-    dispatch(getTodoList(id));
-    dispatch(setUrlParams(+id));
-  }, [dispatch, id, categoriesList]); */
+  const { todoList, errors } = useSelector((state) => state.todo);
 
   useEffect(() => {
     dispatch(getTodoList(id));
@@ -57,10 +52,7 @@ const TodoList = () => {
   return (
     <TodoListWrap>
       <AddTodoButton onClick={handleClick} />
-      {filteredItems(activeFilter)}
-      {/* {activeFilter === "all" && filteredItems(activeFilter)}
-      {activeFilter === "active" && filteredItems(activeFilter)}
-      {activeFilter === "done" && filteredItems(activeFilter)} */}
+      {errors.todoError ? <TodoError /> : filteredItems(activeFilter)}
     </TodoListWrap>
   );
 };
