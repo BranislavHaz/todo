@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-export const AddCategoryForm = styled.form``;
+export const AddCategoryForm = styled.form`
+  display: flex;
+  justify-content: center;
+`;
 
 export const AddCategoryInput = styled.input.attrs({ type: "text" })`
   width: 70%;
