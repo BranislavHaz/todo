@@ -1,17 +1,12 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setActiveFilter } from "../redux/globalSlice";
 
-import {
-  FilterWrap,
-  FilterList,
-  FilterElement,
-  FilterLink,
-} from "./TodoFilterItems.styled";
+import * as $ from "./TodoFilterItems.styled";
 
 const TodoFilterItems = () => {
-  const { activeFilter } = useSelector((state) => state.global);
   const dispatch = useDispatch();
+  const { activeFilter } = useSelector((state) => state.global);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -19,40 +14,40 @@ const TodoFilterItems = () => {
   };
 
   return (
-    <FilterWrap>
-      <FilterList>
-        <FilterElement>
-          <FilterLink
+    <$.Wrap>
+      <$.List>
+        <$.Element>
+          <$.Link
             id="all"
             onClick={handleClick}
             href="/"
             state={activeFilter === "all" && "active"}
           >
             Všetky
-          </FilterLink>
-        </FilterElement>
-        <FilterElement>
-          <FilterLink
+          </$.Link>
+        </$.Element>
+        <$.Element>
+          <$.Link
             id="active"
             onClick={handleClick}
             href="/"
             state={activeFilter === "active" && "active"}
           >
             Aktívne
-          </FilterLink>
-        </FilterElement>
-        <FilterElement>
-          <FilterLink
+          </$.Link>
+        </$.Element>
+        <$.Element>
+          <$.Link
             id="done"
             onClick={handleClick}
             href="/"
             state={activeFilter === "done" && "active"}
           >
             Dokončené
-          </FilterLink>
-        </FilterElement>
-      </FilterList>
-    </FilterWrap>
+          </$.Link>
+        </$.Element>
+      </$.List>
+    </$.Wrap>
   );
 };
 

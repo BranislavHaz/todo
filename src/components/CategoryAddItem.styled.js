@@ -1,50 +1,45 @@
 import styled, { keyframes } from "styled-components";
+import { breakpoints } from "../App.styled";
 
-export const AddCategoryForm = styled.form`
+export const Form = styled.form`
   margin-top: 2em;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
 
-  @media (max-width: 481px) {
-    display: flex;
+  @media (max-width: ${breakpoints.desktop}) {
     flex-direction: column;
+    justify-content: end;
     align-items: center;
   }
 `;
 
-export const AddCategoryInput = styled.input.attrs({ type: "text" })`
+export const Input = styled.input.attrs({ type: "text" })`
   width: 50%;
-  border-color: ${(props) => props.state === "error" && "red"};
-  animation: ${(props) => props.state === "error" && Error} 0.15s 3 backwards;
+  border-color: ${(props) => props.state === "error" && "var(--error-color)"};
+  animation: ${(props) => props.state === "error" && ErrorAnimation}
+    var(--error-animation);
 
   &:focus {
-    border-color: ${(props) => props.state === "error" && "red"};
+    border-color: ${(props) => props.state === "error" && "var(--error-color)"};
   }
 
   &::placeholder {
-    color: ${(props) => props.state === "error" && "red"};
+    color: ${(props) => props.state === "error" && "var(--error-color)"};
   }
 
-  @media (max-width: 1025px) {
+  @media (max-width: ${breakpoints.desktop}) {
     width: 90%;
   }
 `;
 
-export const Error = keyframes`
-
-  25% {
-    transform: rotate(1deg);
-  }
-  75% {
-    transform: rotate(-1deg);
-  }
-`;
-
-export const AddCategorySubmit = styled.input.attrs({ type: "submit" })`
+export const Submit = styled.input.attrs({ type: "submit" })`
   margin-left: 0.4em;
-  padding: 0.6em 0.8em 0.8em 0.8em;
+  padding: var(--btn-padding);
   border: none;
-  border-radius: var(--input-border-radius);
+  border-radius: var(--btn-radius);
   background-color: var(--btn-bg-color);
-  color: #fff;
+  color: var(--white);
   transition: var(--transition-light);
   cursor: pointer;
 
@@ -53,8 +48,19 @@ export const AddCategorySubmit = styled.input.attrs({ type: "submit" })`
     background-color: var(--btn-bg-color-hover);
   }
 
-  @media (max-width: 1025px) {
+  @media (max-width: ${breakpoints.desktop}) {
     margin: 1em 0 0 0;
     width: 90%;
+  }
+`;
+
+// Animations
+
+export const ErrorAnimation = keyframes`
+  25% {
+    transform: rotate(1deg);
+  }
+  75% {
+    transform: rotate(-1deg);
   }
 `;

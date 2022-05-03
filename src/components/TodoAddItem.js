@@ -2,45 +2,32 @@ import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSelector, useDispatch } from "react-redux";
-import { postTodoItem, showAddTodoForm } from "../redux/todoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { postTodoItem, setTodoAddForm } from "../redux/todoSlice";
 
-import {
-  AddTodoWrap,
-  CloseTodoForm,
-  AddTodoForm,
-  InputWrap,
-  InputTodoTitle,
-  InputTodoText,
-  InputTodoDate,
-  InputTodoSubmit,
-  ErrorMessage,
-} from "./TodoAddItem.styled";
+import * as $ from "./TodoAddItem.styled";
 
-import deleteIcon from "../img/delete-category.png";
+import closeIcon from "../img/delete-category.png";
 
 const schema = yup.object().shape({
   title: yup
     .string()
-    .min(1, "Zadajte minimálne 1 znak.")
-    .max(20, "Maximálny povolený počet znakov je 20.")
-    .required("Toto pole je povinné."),
+    .min(2, "To fakt si chcel nazvať úlohu takto? Pridaj...")
+    .max(20, "Ajajaj, nebuť roztopašný! Maximum je 20."),
   text: yup
     .string()
-    .min(2, "Zadajte minimálne 2 znaky.")
-    .max(300, "Maximálny povolený počet znakov je 300.")
-    .required("Toto pole je povinné."),
+    .min(2, "Sám tomu neveríš, pridaj tam čosi.")
+    .max(300, "Šikulka, avšak načo keď maximum je 300?"),
   deadline: yup
     .date()
-    .min(new Date(), "Zadajte dátum väčší ako momentálny.")
-    .required("Toto pole je povinné.")
+    .min(new Date(), "Ty snaď vieš cestovať do minulosti?")
     .typeError("Vyplňte prosím dátum deadlinu."),
 });
 
-const TodoAddItem = () => {
+const AddTodoItem = () => {
   const formRef = useRef(null);
-  const { urlParams } = useSelector((state) => state.global);
   const dispatch = useDispatch();
+  const { urlParams } = useSelector((state) => state.global);
 
   const {
     register,
@@ -49,58 +36,60 @@ const TodoAddItem = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    reValidateMode: "onSubmit",
   });
 
   const onSubmit = (data) => {
     formRef.current.reset();
     dispatch(postTodoItem(urlParams, data));
     reset();
-    dispatch(showAddTodoForm(false));
+    dispatch(setTodoAddForm(false));
   };
 
   const handleClick = () => {
-    dispatch(showAddTodoForm(false));
+    dispatch(setTodoAddForm(false));
   };
 
   return (
-    <AddTodoWrap>
-      <AddTodoForm
+    <$.Wrap>
+      <$.Form
         onSubmit={handleSubmit(onSubmit)}
         ref={formRef}
         id="add-todo-item"
       >
-        <InputWrap>
-          <InputTodoTitle
+        <$.InputWrap>
+          <$.Input
+            type="text"
             placeholder="Názov úlohy"
             {...register("title")}
             state={errors.title && "error"}
           />
-          {errors.title && <ErrorMessage>{errors.title?.message}</ErrorMessage>}
-        </InputWrap>
-        <InputWrap>
-          <InputTodoText
+          {errors.title && <$.ErrorText>{errors.title?.message}</$.ErrorText>}
+        </$.InputWrap>
+        <$.InputWrap>
+          <$.Input
+            type="text"
             placeholder="Podrobný popis úlohy"
             form="add-todo-item"
             {...register("text")}
             state={errors.text && "error"}
           />
-          {errors.text && <ErrorMessage>{errors.text?.message}</ErrorMessage>}
-        </InputWrap>
-        <InputWrap>
-          <InputTodoDate
+          {errors.text && <$.ErrorText>{errors.text?.message}</$.ErrorText>}
+        </$.InputWrap>
+        <$.InputWrap>
+          <$.Input
+            type="datetime-local"
             state={errors.deadline && "error"}
             {...register("deadline")}
           />
           {errors.deadline && (
-            <ErrorMessage>{errors.deadline?.message}</ErrorMessage>
+            <$.ErrorText>{errors.deadline?.message}</$.ErrorText>
           )}
-        </InputWrap>
-        <InputTodoSubmit />
-        <CloseTodoForm src={deleteIcon} onClick={handleClick} />
-      </AddTodoForm>
-    </AddTodoWrap>
+        </$.InputWrap>
+        <$.Submit />
+        <$.CloseIcon src={closeIcon} onClick={handleClick} />
+      </$.Form>
+    </$.Wrap>
   );
 };
 
-export default TodoAddItem;
+export default AddTodoItem;

@@ -3,6 +3,19 @@
 /* Variables */
 :root {
   --font: "Poppins", sans-serif;
+  --white: #ffffff;
+  --black: #000000;
+
+  --primary-color: #383c4b;
+  --secondary-color: #d8ddde;
+
+  --desktop: 1025px;
+  --laptop: 769px;
+  --tablet: 600px;
+
+  --error-color: rgb(183, 32, 32);
+  --error-color-text: #b9c2c3;
+  --error-animation: 0.15s 3 backwards;
 
   --primary-text-color: #383c4b;
   --secondary-text-color: #9f9f9f;
@@ -17,6 +30,8 @@
   --input-border-radius: 7px;
   --input-height: 2.5em;
 
+  --btn-padding: 0.6em 0.8em 0.8em 0.8em;
+  --btn-radius: 25px;
   --btn-bg-color: #ff7562;
   --btn-bg-color-hover: #f3705e;
 }
@@ -61,12 +76,3 @@ textarea:focus {
   outline: none;
   border: var(--input-border-focus);
 }
-
-/* Breakpoints */
-/*
-breakpoint-mobile: 320px;
-breakpoint-tablet: 481px;
-breakpoint-laptop: 769px;
-breakpoint-desktop: 1025px;
-breakpoint-extra-large: 1201px;
-*/

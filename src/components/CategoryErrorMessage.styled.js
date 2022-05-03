@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const ErrorMessage = styled.div`
+export const Wrap = styled.div`
   margin-top: 4em;
   padding: 2em;
 `;
 
-export const ErrorMessageText = styled.p`
+export const Text = styled.p`
   margin-top: 0.4em;
-  color: #b9c2c3;
+  color: var(--error-color-text);
   text-align: center;
 
   &:last-of-type {

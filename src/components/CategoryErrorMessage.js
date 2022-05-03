@@ -1,17 +1,13 @@
 import React from "react";
 
-import { ErrorMessage, ErrorMessageText } from "./CategoryErrorMessage.styled";
+import * as $ from "./CategoryErrorMessage.styled";
 
 const CategoryErrorMessage = () => {
   return (
-    <ErrorMessage>
-      <ErrorMessageText>
-        Vyzerá to, že váš zoznam kategórií je prázdny.
-      </ErrorMessageText>
-      <ErrorMessageText>
-        Čo tak to napraviť a jeden si pridať? 🤔
-      </ErrorMessageText>
-    </ErrorMessage>
+    <$.Wrap>
+      <$.Text>Vyzerá to, že váš zoznam kategórií je prázdny.</$.Text>
+      <$.Text>Čo tak to napraviť a jeden si pridať? 🤔</$.Text>
+    </$.Wrap>
   );
 };
 

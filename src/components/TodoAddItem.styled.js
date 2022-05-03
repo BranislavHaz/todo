@@ -1,6 +1,7 @@
 import styled, { keyframes } from "styled-components";
+import { breakpoints } from "../App.styled";
 
-export const AddTodoWrap = styled.div`
+export const Wrap = styled.div`
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -10,7 +11,7 @@ export const AddTodoWrap = styled.div`
   z-index: 1;
 `;
 
-export const AddTodoForm = styled.form`
+export const Form = styled.form`
   width: 50vw;
   max-width: 650px;
   padding: 2em;
@@ -21,18 +22,17 @@ export const AddTodoForm = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   border-radius: var(--border-radius);
-  background-color: #f6fafb;
+  background-color: var(--white);
 
-  @media (max-width: 1025px) {
-    width: 70%;
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 70vw;
     padding: 1em;
   }
 
-  @media (max-width: 481px) {
-    width: 80%;
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 90vw;
     padding: 0.5em;
   }
 `;
@@ -55,7 +55,7 @@ export const InputWrap = styled.div`
     text-align: center;
   }
 
-  @media (max-width: 481px) {
+  @media (max-width: ${breakpoints.tablet}) {
     &:nth-of-type(1),
     &:nth-of-type(2) {
       width: 80%;
@@ -67,55 +67,24 @@ export const InputWrap = styled.div`
   }
 `;
 
-export const InputTodoTitle = styled.input.attrs({ type: "text" })`
+export const Input = styled.input`
   width: 100%;
-  border-color: ${(props) => props.state === "error" && "red"};
-  animation: ${(props) => props.state === "error" && Error} 0.15s 3 backwards;
+  border-color: ${(props) => props.state === "error" && "var(--error-color)"};
+  animation: ${(props) => props.state === "error" && ErrorAnimation}
+    var(--error-animation);
 
   &:focus {
-    border-color: ${(props) => props.state === "error" && "red"};
+    border-color: ${(props) => props.state === "error" && "var(--error-color)"};
   }
 `;
 
-export const InputTodoText = styled.textarea`
-  width: 100%;
-  height: 8em;
-  border-color: ${(props) => props.state === "error" && "red"};
-  animation: ${(props) => props.state === "error" && Error} 0.15s 3 backwards;
-
-  &:focus {
-    border-color: ${(props) => props.state === "error" && "red"};
-  }
-`;
-
-export const InputTodoDate = styled.input.attrs({ type: "datetime-local" })`
-  width: 100%;
-  text-align: center;
-  border-color: ${(props) => props.state === "error" && "red"};
-  animation: ${(props) => props.state === "error" && Error} 0.15s 3 backwards;
-
-  &:focus {
-    border-color: ${(props) => props.staty === "error" && "red"};
-  }
-`;
-
-export const Error = keyframes`
-
-  25% {
-    transform: translateX(0.5em);
-  }
-  75% {
-    transform: translate(-0.5em);
-  }
-`;
-
-export const InputTodoSubmit = styled.input.attrs({ type: "submit" })`
+export const Submit = styled.input.attrs({ type: "submit" })`
   margin-top: 2em;
-  padding: 0.6em 0.8em 0.8em 0.8em;
+  padding: var(--btn-padding);
   border: none;
   border-radius: var(--input-border-radius);
   background-color: var(--btn-bg-color);
-  color: #fff;
+  color: var(--white);
   transition: var(--transition-light);
   cursor: pointer;
 
@@ -124,22 +93,22 @@ export const InputTodoSubmit = styled.input.attrs({ type: "submit" })`
     background-color: var(--btn-bg-color-hover);
   }
 
-  @media (max-width: 1025px) {
+  @media (max-width: ${breakpoints.desktop}) {
     margin-bottom: 2em;
   }
 `;
 
-export const ErrorMessage = styled.span`
+export const ErrorText = styled.span`
   width: 100%;
   padding: 0 0.2em;
   position: relative;
   bottom: -0.2em;
   left: 0;
-  color: red;
+  color: var(--error-color);
   font-size: 0.8em;
 `;
 
-export const CloseTodoForm = styled.img`
+export const CloseIcon = styled.img`
   width: 1.5em;
   height: 1.5em;
   position: absolute;
@@ -151,10 +120,22 @@ export const CloseTodoForm = styled.img`
     top: 1.45em;
   }
 
-  @media (max-width: 481px) {
+  @media (max-width: ${breakpoints.tablet}) {
     width: 0.9em;
     height: 0.9em;
     top: 1em;
     right: 1em;
+  }
+`;
+
+// Animations
+
+export const ErrorAnimation = keyframes`
+
+  25% {
+    transform: translateX(0.5em);
+  }
+  75% {
+    transform: translate(-0.5em);
   }
 `;

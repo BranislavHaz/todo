@@ -1,74 +1,53 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const apiUrl = "https://626abc396a86cd64adb203dd.mockapi.io/api/list";
+const baseURL = "https://626abc396a86cd64adb203dd.mockapi.io/api/list";
 
 const initialState = {
-  categoriesList: [],
-  todoList: [],
-  showAddTodoForm: false,
-  errors: {
-    todoError: false,
-    categoryError: false,
-  },
+  categoryListItems: [],
+  categoryCurrentName: "",
+  isCategoryListLoaded: true,
 };
 
-export const todoSlice = createSlice({
-  name: "todo",
+export const categorySlice = createSlice({
+  name: "category",
   initialState,
   reducers: {
-    setCategories: (state, action) => {
-      state.categoriesList = action.payload;
+    setCategoryList: (state, action) => {
+      state.categoryListItems = action.payload;
     },
-    setTodo: (state, action) => {
-      state.todoList = action.payload;
+    setCategoryName: (state, action) => {
+      state.categoryCurrentName = action.payload;
     },
-    showAddTodoForm: (state, action) => {
-      state.showAddTodoForm = action.payload;
-    },
-    setError: (state, action) => {
-      switch (action.payload.type) {
-        case "todo":
-          state.errors.todoError = action.payload.state;
-          break;
-        case "category":
-          state.errors.categoryError = action.payload.state;
-          break;
-        default:
-          break;
-      }
+    setCategoryLoad: (state, action) => {
+      state.isCategoryListLoaded = action.payload;
     },
   },
 });
 
-export const { setCategories, setTodo, showAddTodoForm, setError } =
-  todoSlice.actions;
+export const { setCategoryList, setCategoryName, setCategoryLoad } =
+  categorySlice.actions;
 
-export default todoSlice.reducer;
+export default categorySlice.reducer;
 
-// Load category items
-export const loadCategoryItems = () => {
+// Get category items
+export const getCategoryItems = () => {
   return (dispatch) => {
-    axios.get(apiUrl).then((resp) => dispatch(setCategories(resp.data)));
+    axios
+      .get(baseURL)
+      .then((resp) => dispatch(setCategoryList(resp.data)))
+      .then(() => dispatch(setCategoryLoad(true)))
+      .catch(() => dispatch(setCategoryLoad(false)));
   };
 };
 
 // Post category item
-export const postTodoCategory = (data) => {
+export const postCategoryItems = (data) => {
   return (dispatch) => {
     axios
-      .post(apiUrl, {
+      .post(baseURL, {
         name: data,
       })
-      .then(() => dispatch(loadCategoryItems()));
-  };
-};
-
-// Delete category item
-export const deleteTodoCategory = (idList) => {
-  return (dispatch, getState) => {
-    axios.delete(`${apiUrl}/${idList}`).then(() => {
-      dispatch(loadCategoryItems());
-    });
+      .then(() => dispatch(getCategoryItems()));
   };
 };

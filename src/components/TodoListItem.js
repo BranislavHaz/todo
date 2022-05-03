@@ -1,42 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUrlParams } from "../redux/globalSlice";
-import { setActiveFilter, setMobileMenu } from "../redux/globalSlice";
-import { getTodoList, showAddTodoForm } from "../redux/todoSlice";
+import { setActiveFilter } from "../redux/globalSlice";
+import { getTodoList, setTodoAddForm } from "../redux/todoSlice";
 
 import TodoFilterItems from "./TodoFilterItems";
 import TodoItem from "./TodoItem";
 import TodoErrorMessage from "./TodoErrorMessage";
 
-import {
-  TodoListWrap,
-  TodoListTitle,
-  AddTodoButton,
-} from "./TodoListItem.styled";
+import * as $ from "./TodoListItem.styled";
 
 const TodoListItem = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { searchTerm, activeFilter } = useSelector((state) => state.global);
-  const { categoriesList, todoList, errors } = useSelector(
+  const { categoryListItems } = useSelector((state) => state.category);
+  const { todoList, isTodoListLoaded, isTodoListAvailable } = useSelector(
     (state) => state.todo
   );
-  const [categoryName, setCategoryName] = useState(null);
 
-  /*   const getCategoryName = () => {
-    const currentCategory = categoriesList?.find(
+  const getCategoryName = () => {
+    const currentCategory = categoryListItems?.find(
       (category) => category.id === id
     );
-    setCategoryName(currentCategory.name);
-  }; */
+    return currentCategory?.name;
+  };
 
   useEffect(() => {
     dispatch(getTodoList(id));
     dispatch(setUrlParams(+id));
     dispatch(setActiveFilter("all"));
-    dispatch(setMobileMenu(false));
   }, [id]);
 
   const searchedItems = todoList?.filter((todo) => {
@@ -64,16 +58,16 @@ const TodoListItem = () => {
   };
 
   const handleClick = () => {
-    dispatch(showAddTodoForm(true));
+    dispatch(setTodoAddForm(true));
   };
 
   return (
-    <TodoListWrap>
-      <TodoListTitle>{categoryName && categoryName}</TodoListTitle>
-      <AddTodoButton onClick={handleClick} />
-      <TodoFilterItems />
-      {errors.todoError ? <TodoErrorMessage /> : filteredItems(activeFilter)}
-    </TodoListWrap>
+    <$.Wrap>
+      <$.Title>{getCategoryName()}</$.Title>
+      {isTodoListAvailable && <$.Button onClick={handleClick} />}
+      {isTodoListLoaded && <TodoFilterItems />}
+      {isTodoListLoaded ? filteredItems(activeFilter) : <TodoErrorMessage />}
+    </$.Wrap>
   );
 };
 

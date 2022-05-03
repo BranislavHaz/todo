@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { breakpoints } from "../App.styled";
 
-export const SearchBar = styled.input.attrs({ type: "search" })`
+export const Input = styled.input.attrs({ type: "search" })`
   width: 50%;
   height: 4em;
   margin: 0 auto;
@@ -15,7 +16,7 @@ export const SearchBar = styled.input.attrs({ type: "search" })`
     border: var(--input-border-focus);
   }
 
-  @media (max-width: 769px) {
+  @media (max-width: ${breakpoints.laptop}) {
     width: 80%;
   }
 `;

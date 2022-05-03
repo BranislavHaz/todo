@@ -1,21 +1,22 @@
 import styled from "styled-components";
+import { breakpoints } from "../App.styled";
 
-export const CategoryListWrap = styled.nav`
+export const Wrap = styled.nav`
   min-height: 80vh;
   display: flex;
   justify-content: center;
 `;
 
-export const CategoryListUl = styled.ul`
+export const List = styled.ul`
   width: 80%;
   margin: 2em 0 0 0;
 
-  @media (max-width: 481px) {
+  @media (max-width: ${breakpoints.tablet}) {
     margin: 0;
   }
 `;
 
-export const CategoryItem = styled.li`
+export const Item = styled.li`
   width: 100%;
   margin: 1em 0;
   display: flex;
@@ -23,14 +24,14 @@ export const CategoryItem = styled.li`
   align-items: center;
 
   a:hover {
-    color: #000;
+    color: var(--black);
     padding-left: 0.05em;
     transition: var(--transition-light);
   }
 
-  @media (max-width: 481px) {
+  @media (max-width: ${breakpoints.tablet}) {
     a {
-      color: #fff;
+      color: var(--white);
     }
   }
 `;

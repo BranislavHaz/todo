@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakpoints } from "../App.styled";
 
 export const Main = styled.main`
   width: 100vw;
@@ -10,15 +11,15 @@ export const Main = styled.main`
 
   > * {
     &:first-child {
-      border-right: 1px solid #d8ddde;
+      border-right: 1px solid var(--secondary-color);
     }
   }
 
-  @media (max-width: 1025px) {
+  @media (max-width: ${breakpoints.desktop}) {
     padding: 1em;
   }
 
-  @media (max-width: 481px) {
+  @media (max-width: ${breakpoints.tablet}) {
     padding: 0;
   }
 `;

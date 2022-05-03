@@ -1,31 +1,32 @@
 import styled from "styled-components";
+import { breakpoints } from "../App.styled";
 
-export const FilterWrap = styled.nav`
+export const Wrap = styled.nav`
   margin-top: 2em;
 `;
 
-export const FilterList = styled.ul`
+export const List = styled.ul`
   display: flex;
   justify-content: end;
   margin-right: 2em;
 
-  @media (max-width: 1025px) {
+  @media (max-width: ${breakpoints.desktop}) {
     justify-content: center;
     margin: 0;
   }
 `;
 
-export const FilterElement = styled.li`
+export const Element = styled.li`
   margin: 2em 0.3em 0.3em 0.3em;
 `;
 
-export const FilterLink = styled.a`
+export const Link = styled.a`
   display: flex;
   justify-content: center;
   transition: var(--transition-light);
   color: ${(props) => props.state === "active" && "#ff7562"};
 
   &:hover {
-    color: #f3705e;
+    color: var(--btn-bg-color-hover);
   }
 `;

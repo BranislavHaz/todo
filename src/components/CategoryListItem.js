@@ -1,35 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import CategoryErrorMessage from "./CategoryErrorMessage";
 
-import {
-  CategoryListWrap,
-  CategoryListUl,
-  CategoryItem,
-} from "./CategoryListItem.styled";
+import * as $ from "./CategoryListItem.styled";
 
 const CategoryListItem = () => {
-  const { urlParams } = useSelector((state) => state.global);
-  const { categoriesList, errors } = useSelector((state) => state.todo);
+  const { categoryListItems } = useSelector((state) => state.category);
+
+  const getListItems = useCallback(() => {
+    return categoryListItems
+      ?.slice()
+      .sort((a, b) => (a > b ? 1 : -1))
+      .map((el, id) => {
+        return (
+          <$.Item key={id}>
+            <Link to={`/todolist/${el.id}`}>{el.name}</Link>
+          </$.Item>
+        );
+      });
+  }, [categoryListItems]);
 
   return (
-    <CategoryListWrap>
-      {errors.categoryError && <CategoryErrorMessage />}
-      <CategoryListUl>
-        {!errors.categoryError &&
-          categoriesList
-            ?.slice()
-            .sort((a, b) => (a > b ? 1 : -1))
-            .map((el, id) => {
-              return (
-                <CategoryItem key={id}>
-                  <Link to={`/todolist/${el.id}`}>{el.name}</Link>
-                </CategoryItem>
-              );
-            })}
-      </CategoryListUl>
-    </CategoryListWrap>
+    <$.Wrap>
+      <$.List>{getListItems()}</$.List>
+    </$.Wrap>
   );
 };
 

@@ -3,28 +3,25 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSelector, useDispatch } from "react-redux";
-import { postTodoCategory } from "../redux/todoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setMobileMenu } from "../redux/globalSlice";
+import { postCategoryItems } from "../redux/categorySlice";
 
-import {
-  AddCategoryForm,
-  AddCategoryInput,
-  AddCategorySubmit,
-} from "./CategoryAddItem.styled";
+import * as $ from "./CategoryAddItem.styled";
 
 const schema = yup.object().shape({
   name: yup
     .string()
-    .min(1, "Zadajte minimálne 1 znak.")
-    .max(20, "Maximálny povolený počet znakov je 20.")
-    .required("Toto pole je povinné."),
+    .min(2, "Neskúšaj to namňa a pridaj.")
+    .max(20, "Neprepískol si to? Uber na 20.")
+    .required(),
 });
 
 const CategoryAddItem = () => {
   const navigate = useNavigate();
   const formRef = useRef(null);
-  const { categoriesList } = useSelector((state) => state.todo);
   const dispatch = useDispatch();
+  const { categoryListItems } = useSelector((state) => state.category);
 
   const {
     register,
@@ -35,24 +32,29 @@ const CategoryAddItem = () => {
     resolver: yupResolver(schema),
   });
 
+  const navSubmitCategory = () => {
+    const lastCategory = categoryListItems[categoryListItems?.length - 1];
+    navigate(`/todolist/${+lastCategory.id + 1}`);
+  };
+
   const onSubmit = (data) => {
-    dispatch(postTodoCategory(data.name));
+    dispatch(postCategoryItems(data.name));
+    dispatch(setMobileMenu(false));
     reset();
     formRef.current.reset();
-    const lastCategory = categoriesList[categoriesList?.length - 1];
-    navigate(`/todolist/${+lastCategory.id + 1}`);
+    setTimeout(() => navSubmitCategory(), 400);
   };
 
   return (
     <>
-      <AddCategoryForm onSubmit={handleSubmit(onSubmit)} ref={formRef}>
-        <AddCategoryInput
+      <$.Form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
+        <$.Input
           {...register("name")}
-          placeholder={errors.name && errors.name?.message}
+          placeholder={errors.name ? errors.name?.message : "Pridať kategóriu"}
           state={errors.name && "error"}
         />
-        <AddCategorySubmit />
-      </AddCategoryForm>
+        <$.Submit />
+      </$.Form>
     </>
   );
 };

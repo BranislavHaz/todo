@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const ErrorWrap = styled.div`
+export const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   a:hover {
-    color: #f3705e;
+    color: var(--btn-bg-color-hover);
   }
   a:before {
     content: "←";
@@ -15,4 +15,4 @@ export const ErrorWrap = styled.div`
   }
 `;
 
-export const ErrorImg = styled.img``;
+export const Image = styled.img``;

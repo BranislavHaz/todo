@@ -1,37 +1,28 @@
 import styled, { keyframes } from "styled-components";
+import { breakpoints } from "../App.styled";
 
 export const Header = styled.header`
   width: 25%;
   min-height: 80vh;
 
-  @media (max-width: 481px) {
+  @media (max-width: ${breakpoints.tablet}) {
     width: 100%;
     height: 100%;
     position: fixed;
     opacity: 0;
-    background-color: #383c4b;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--white);
     z-index: 2;
     transform: translateY(-200em);
-    animation: ${(props) => (props.state ? In : Out)} 0.5s forwards;
+    animation: ${(props) => props.state && ShowAnimation} 0.5s forwards;
   }
 `;
 
-export const Out = keyframes`
+export const ShowAnimation = keyframes`
 from {
-  transform: translateY(0);
-  opacity: 1;
+  transform: translateY(-100em);
+  opacity: 0;
 }
-  to {
-    transform: translateY(-200em);
-    opacity: 0;
-  }
-`;
-
-export const In = keyframes`
-from {
-    transform: translateY(-200em);
-  }
   to {
     transform: translateY(0);
     opacity: 1;

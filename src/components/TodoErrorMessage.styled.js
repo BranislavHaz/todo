@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ErrorMessage = styled.div`
+export const Wrap = styled.div`
   margin-top: 4em;
   padding: 2em;
   display: flex;
@@ -8,15 +8,15 @@ export const ErrorMessage = styled.div`
   align-items: center;
 `;
 
-export const ErrorMessageImg = styled.img`
+export const Image = styled.img`
   max-width: 250px;
   height: auto;
   margin-bottom: 3em;
 `;
 
-export const ErrorMessageText = styled.p`
+export const Text = styled.p`
   margin-top: 0.4em;
-  color: #b9c2c3;
+  color: var(--error-color-text);
   text-align: center;
 
   &:last-of-type {

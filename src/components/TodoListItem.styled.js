@@ -1,23 +1,24 @@
 import styled from "styled-components";
+import { breakpoints } from "../App.styled";
 
 import addIcon from "../img/add.png";
 
-export const TodoListWrap = styled.div`
+export const Wrap = styled.div`
   margin: 0.3em 2em 2em 2em;
 `;
 
-export const TodoListTitle = styled.h1`
+export const Title = styled.h1`
   margin: 2em 0;
   text-align: center;
   font-size: 2.3em;
 `;
 
-export const AddTodoButton = styled.div`
+export const Button = styled.div`
   width: 50%;
   height: 6em;
   margin: 1em auto 2em auto;
   padding: 1em;
-  border: 1px dashed #d8ddde;
+  border: 1px dashed var(--secondary-color);
   border-radius: var(--border-radius);
   background: url(${addIcon}) no-repeat center transparent;
   background-size: 3em;
@@ -28,7 +29,7 @@ export const AddTodoButton = styled.div`
     filter: grayscale(60%);
   }
 
-  @media (max-width: 1025px) {
+  @media (max-width: ${breakpoints.desktop}) {
     width: 100%;
   }
 `;
