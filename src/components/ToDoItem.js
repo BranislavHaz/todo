@@ -26,7 +26,7 @@ const TodoItem = ({ data }) => {
 
   const handleEdit = (e) => {
     dispatch(editTodoItem(urlParams, e.target.id));
-    if (activeFilter === "active") {
+    if (activeFilter !== "all") {
       setIsDone(true);
       setTimeout(() => {
         setIsDone(false);

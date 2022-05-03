@@ -22,11 +22,11 @@ export const Item = styled.li`
   display: flex;
   border-bottom: 1px dotted rgba(216, 221, 222, 0.5);
   align-items: center;
+  transition: var(--transition-light);
 
   a:hover {
-    color: var(--black);
+    color: var(--hover-text-color);
     padding-left: 0.05em;
-    transition: var(--transition-light);
   }
 
   @media (max-width: ${breakpoints.tablet}) {

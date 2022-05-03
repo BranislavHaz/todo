@@ -9,7 +9,7 @@ import CategoryErrorMessage from "../components/CategoryErrorMessage";
 import * as $ from "./Navbar.styled";
 
 const Navbar = () => {
-  const { mobileMenu } = useSelector((state) => state.global);
+  const { showMobileMenu } = useSelector((state) => state.global);
   const dispatch = useDispatch();
   const { isCategoryListLoaded } = useSelector((state) => state.category);
 
@@ -19,7 +19,7 @@ const Navbar = () => {
 
   return (
     <>
-      <$.Header state={mobileMenu}>
+      <$.Header state={showMobileMenu}>
         <CategoryAddItem />
         {isCategoryListLoaded ? <CategoryListItem /> : <CategoryErrorMessage />}
       </$.Header>

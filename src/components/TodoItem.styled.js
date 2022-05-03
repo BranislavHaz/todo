@@ -12,7 +12,7 @@ export const Wrap = styled.div`
   animation: ${(props) =>
       (props.state === "delete" && DeleteAnimation) ||
       (props.state === "done" && DoneAnimation)}
-    var(--error-animation);
+    0.3s backwards;
 
   &:hover {
     background-color: var(--secondary-color);

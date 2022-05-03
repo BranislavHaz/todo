@@ -4,7 +4,7 @@ const initialState = {
   searchTerm: null,
   urlParams: null,
   activeFilter: "all",
-  mobileMenu: false,
+  showMobileMenu: false,
 };
 
 export const globalSlice = createSlice({
@@ -21,7 +21,7 @@ export const globalSlice = createSlice({
       state.activeFilter = action.payload;
     },
     setMobileMenu: (state, action) => {
-      state.mobileMenu = action.payload;
+      state.showMobileMenu = action.payload;
     },
   },
 });

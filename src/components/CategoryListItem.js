@@ -1,24 +1,32 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setMobileMenu } from "../redux/globalSlice";
 
 import * as $ from "./CategoryListItem.styled";
 
 const CategoryListItem = () => {
+  const dispatch = useDispatch();
   const { categoryListItems } = useSelector((state) => state.category);
 
-  const getListItems = useCallback(() => {
+  const handleClick = () => {
+    dispatch(setMobileMenu(false));
+  };
+
+  const getListItems = () => {
     return categoryListItems
       ?.slice()
       .sort((a, b) => (a > b ? 1 : -1))
-      .map((el, id) => {
+      .map((el) => {
         return (
-          <$.Item key={id}>
-            <Link to={`/todolist/${el.id}`}>{el.name}</Link>
+          <$.Item key={el.id}>
+            <Link to={`/todolist/${el.id}`} onClick={handleClick}>
+              {el.name}
+            </Link>
           </$.Item>
         );
       });
-  }, [categoryListItems]);
+  };
 
   return (
     <$.Wrap>

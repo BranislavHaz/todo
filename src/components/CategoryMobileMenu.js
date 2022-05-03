@@ -9,15 +9,15 @@ import openMenuIcon from "../img/open-burger.png";
 
 const CategoryMobileMenu = () => {
   const dispatch = useDispatch();
-  const { mobileMenu } = useSelector((state) => state.global);
+  const { showMobileMenu } = useSelector((state) => state.global);
 
   const handleClick = () => {
-    dispatch(setMobileMenu(!mobileMenu));
+    dispatch(setMobileMenu(!showMobileMenu));
   };
 
   return (
-    <$.Wrap onClick={handleClick} state={mobileMenu}>
-      <$.Icon src={mobileMenu ? closeMenuIcon : openMenuIcon} />
+    <$.Wrap onClick={handleClick} state={showMobileMenu}>
+      <$.Icon src={showMobileMenu ? closeMenuIcon : openMenuIcon} />
     </$.Wrap>
   );
 };

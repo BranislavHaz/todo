@@ -33,8 +33,12 @@ const CategoryAddItem = () => {
   });
 
   const navSubmitCategory = () => {
-    const lastCategory = categoryListItems[categoryListItems?.length - 1];
-    navigate(`/todolist/${+lastCategory.id + 1}`);
+    let lastCategory = categoryListItems[categoryListItems?.length - 1];
+    if (categoryListItems?.length < 1) {
+      navigate(`/todolist/1`);
+    } else {
+      navigate(`/todolist/${+lastCategory.id + 1}`);
+    }
   };
 
   const onSubmit = (data) => {
