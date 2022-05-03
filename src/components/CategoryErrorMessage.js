@@ -1,8 +1,8 @@
 import React from "react";
 
-import { ErrorMessage, ErrorMessageText } from "./CategoryError.styled";
+import { ErrorMessage, ErrorMessageText } from "./CategoryErrorMessage.styled";
 
-const CategoryError = () => {
+const CategoryErrorMessage = () => {
   return (
     <ErrorMessage>
       <ErrorMessageText>
@@ -15,4 +15,4 @@ const CategoryError = () => {
   );
 };
 
-export default CategoryError;
+export default CategoryErrorMessage;

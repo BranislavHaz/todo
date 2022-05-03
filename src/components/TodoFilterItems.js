@@ -7,9 +7,9 @@ import {
   FilterList,
   FilterElement,
   FilterLink,
-} from "./FilterTodoItems.styled";
+} from "./TodoFilterItems.styled";
 
-const FilterTodoItems = () => {
+const TodoFilterItems = () => {
   const { activeFilter } = useSelector((state) => state.global);
   const dispatch = useDispatch();
 
@@ -56,4 +56,4 @@ const FilterTodoItems = () => {
   );
 };
 
-export default FilterTodoItems;
+export default TodoFilterItems;

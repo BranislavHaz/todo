@@ -8,7 +8,9 @@ to {
 
 const Done = keyframes`
 to {
-  transform: rotate(5deg) translate(200em, 0);
+  //transform: rotate(5deg) translate(200em, 0);
+  transform: scale(1.1);
+  opacity: 0;
 }
 `;
 
@@ -23,7 +25,7 @@ export const TodoItemWrap = styled.div`
   transition: var(--transition-light);
   animation: ${(props) =>
       (props.state === "delete" && Delete) || (props.state === "done" && Done)}
-    0.3s linear forwards;
+    0.2s linear forwards;
 
   &:hover {
     background-color: #fbfbfb;

@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getTodoCategories } from "../redux/todoSlice";
-import AddTodoCategory from "../components/AddTodoCategory";
-import CategoryList from "../components/CategoryList";
+import CategoryAddItem from "../components/CategoryAddItem";
+import CategoryListItem from "../components/CategoryListItem";
+import CategoryMobileMenu from "../components/CategoryMobileMenu";
 
 import { Header } from "./Navbar.styled";
 
 const Navbar = () => {
+  const { mobileMenu } = useSelector((state) => state.global);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,10 +16,13 @@ const Navbar = () => {
   }, [dispatch]);
 
   return (
-    <Header>
-      <AddTodoCategory />
-      <CategoryList />
-    </Header>
+    <>
+      <Header state={mobileMenu}>
+        <CategoryAddItem />
+        <CategoryListItem />
+      </Header>
+      <CategoryMobileMenu />
+    </>
   );
 };
 

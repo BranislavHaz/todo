@@ -6,6 +6,12 @@ export const TodoListWrap = styled.div`
   margin: 0.3em 2em 2em 2em;
 `;
 
+export const TodoListTitle = styled.h1`
+  margin: 2em 0;
+  text-align: center;
+  font-size: 2.3em;
+`;
+
 export const AddTodoButton = styled.div`
   width: 50%;
   height: 6em;
@@ -20,5 +26,9 @@ export const AddTodoButton = styled.div`
 
   &:hover {
     filter: grayscale(60%);
+  }
+
+  @media (max-width: 1025px) {
+    width: 100%;
   }
 `;

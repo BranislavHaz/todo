@@ -12,7 +12,7 @@ export const AddTodoWrap = styled.div`
 
 export const AddTodoForm = styled.form`
   width: 50vw;
-  height: 40vh;
+  max-width: 650px;
   padding: 2em;
   position: fixed;
   left: 50%;
@@ -25,6 +25,16 @@ export const AddTodoForm = styled.form`
   transform: translate(-50%, -50%);
   border-radius: var(--border-radius);
   background-color: #f6fafb;
+
+  @media (max-width: 1025px) {
+    width: 70%;
+    padding: 1em;
+  }
+
+  @media (max-width: 481px) {
+    width: 80%;
+    padding: 0.5em;
+  }
 `;
 
 export const InputWrap = styled.div`
@@ -43,6 +53,17 @@ export const InputWrap = styled.div`
   &:nth-of-type(3) {
     width: 40%;
     text-align: center;
+  }
+
+  @media (max-width: 481px) {
+    &:nth-of-type(1),
+    &:nth-of-type(2) {
+      width: 80%;
+    }
+
+    &:nth-of-type(3) {
+      width: 80%;
+    }
   }
 `;
 
@@ -102,13 +123,17 @@ export const InputTodoSubmit = styled.input.attrs({ type: "submit" })`
   &:active {
     background-color: var(--btn-bg-color-hover);
   }
+
+  @media (max-width: 1025px) {
+    margin-bottom: 2em;
+  }
 `;
 
 export const ErrorMessage = styled.span`
   width: 100%;
   padding: 0 0.2em;
-  position: absolute;
-  bottom: -1.5em;
+  position: relative;
+  bottom: -0.2em;
   left: 0;
   color: red;
   font-size: 0.8em;
@@ -124,5 +149,12 @@ export const CloseTodoForm = styled.img`
 
   &:hover {
     top: 1.45em;
+  }
+
+  @media (max-width: 481px) {
+    width: 0.9em;
+    height: 0.9em;
+    top: 1em;
+    right: 1em;
   }
 `;

@@ -2,12 +2,16 @@ import styled, { keyframes } from "styled-components";
 
 export const AddCategoryForm = styled.form`
   margin-top: 2em;
-  display: flex;
-  justify-content: center;
+
+  @media (max-width: 481px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const AddCategoryInput = styled.input.attrs({ type: "text" })`
-  width: 70%;
+  width: 50%;
   border-color: ${(props) => props.state === "error" && "red"};
   animation: ${(props) => props.state === "error" && Error} 0.15s 3 backwards;
 
@@ -17,6 +21,10 @@ export const AddCategoryInput = styled.input.attrs({ type: "text" })`
 
   &::placeholder {
     color: ${(props) => props.state === "error" && "red"};
+  }
+
+  @media (max-width: 1025px) {
+    width: 90%;
   }
 `;
 
@@ -43,5 +51,10 @@ export const AddCategorySubmit = styled.input.attrs({ type: "submit" })`
   &:hover,
   &:active {
     background-color: var(--btn-bg-color-hover);
+  }
+
+  @media (max-width: 1025px) {
+    margin: 1em 0 0 0;
+    width: 90%;
   }
 `;

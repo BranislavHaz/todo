@@ -1,24 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setUrlParams } from "../redux/globalSlice";
+import { setActiveFilter, setMobileMenu } from "../redux/globalSlice";
 import { getTodoList, showAddTodoForm } from "../redux/todoSlice";
 
+import TodoFilterItems from "./TodoFilterItems";
 import TodoItem from "./TodoItem";
-import TodoError from "./TodoError";
+import TodoErrorMessage from "./TodoErrorMessage";
 
-import { TodoListWrap, AddTodoButton } from "./TodoList.styled";
+import {
+  TodoListWrap,
+  TodoListTitle,
+  AddTodoButton,
+} from "./TodoListItem.styled";
 
-const TodoList = ({ isCorrect }) => {
+const TodoListItem = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { searchTerm, activeFilter } = useSelector((state) => state.global);
-  const { todoList, errors } = useSelector((state) => state.todo);
+  const { categoriesList, todoList, errors } = useSelector(
+    (state) => state.todo
+  );
+  const [categoryName, setCategoryName] = useState(null);
+
+  /*   const getCategoryName = () => {
+    const currentCategory = categoriesList?.find(
+      (category) => category.id === id
+    );
+    setCategoryName(currentCategory.name);
+  }; */
 
   useEffect(() => {
     dispatch(getTodoList(id));
     dispatch(setUrlParams(+id));
+    dispatch(setActiveFilter("all"));
+    dispatch(setMobileMenu(false));
   }, [id]);
 
   const searchedItems = todoList?.filter((todo) => {
@@ -51,10 +69,12 @@ const TodoList = ({ isCorrect }) => {
 
   return (
     <TodoListWrap>
-      {isCorrect && <AddTodoButton onClick={handleClick} />}
-      {errors.todoError ? <TodoError /> : filteredItems(activeFilter)}
+      <TodoListTitle>{categoryName && categoryName}</TodoListTitle>
+      <AddTodoButton onClick={handleClick} />
+      <TodoFilterItems />
+      {errors.todoError ? <TodoErrorMessage /> : filteredItems(activeFilter)}
     </TodoListWrap>
   );
 };
 
-export default TodoList;
+export default TodoListItem;

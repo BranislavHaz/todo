@@ -17,8 +17,7 @@ import doneIcon from "../img/done.png";
 import incompleteIcon from "../img/incomplete.png";
 
 const TodoItem = ({ data }) => {
-  const { urlParams } = useSelector((state) => state.global);
-  const { todoFilter } = useSelector((state) => state.todo);
+  const { urlParams, activeFilter } = useSelector((state) => state.global);
   const dispatch = useDispatch();
   const date = new Date(data.deadline).toLocaleString();
   // const date = new Date(todo.deadline).toLocaleDateString();
@@ -36,7 +35,7 @@ const TodoItem = ({ data }) => {
 
   const handleEdit = (e) => {
     dispatch(editTodoItem(urlParams, e.target.id));
-    if (todoFilter === "active") {
+    if (activeFilter === "active") {
       setIsDone(true);
       setTimeout(() => {
         setIsDone(false);

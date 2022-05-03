@@ -2,8 +2,7 @@ import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { postTodoItem, showAddTodoForm } from "../redux/todoSlice";
 
 import {
@@ -16,7 +15,7 @@ import {
   InputTodoDate,
   InputTodoSubmit,
   ErrorMessage,
-} from "./AddTodoItem.styled";
+} from "./TodoAddItem.styled";
 
 import deleteIcon from "../img/delete-category.png";
 
@@ -38,7 +37,7 @@ const schema = yup.object().shape({
     .typeError("Vyplňte prosím dátum deadlinu."),
 });
 
-const AddTodoItem = () => {
+const TodoAddItem = () => {
   const formRef = useRef(null);
   const { urlParams } = useSelector((state) => state.global);
   const dispatch = useDispatch();
@@ -104,4 +103,4 @@ const AddTodoItem = () => {
   );
 };
 
-export default AddTodoItem;
+export default TodoAddItem;

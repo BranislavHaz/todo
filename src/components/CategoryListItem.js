@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import CategoryError from "./CategoryError";
+import { useSelector } from "react-redux";
+import CategoryErrorMessage from "./CategoryErrorMessage";
 
 import {
   CategoryListWrap,
   CategoryListUl,
   CategoryItem,
-} from "./CategoryList.styled";
+} from "./CategoryListItem.styled";
 
-const CategoryList = () => {
+const CategoryListItem = () => {
+  const { urlParams } = useSelector((state) => state.global);
   const { categoriesList, errors } = useSelector((state) => state.todo);
 
   return (
     <CategoryListWrap>
-      {errors.categoryError && <CategoryError />}
+      {errors.categoryError && <CategoryErrorMessage />}
       <CategoryListUl>
         {!errors.categoryError &&
           categoriesList
@@ -32,4 +33,4 @@ const CategoryList = () => {
   );
 };
 
-export default CategoryList;
+export default CategoryListItem;

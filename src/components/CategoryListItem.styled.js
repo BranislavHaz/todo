@@ -9,6 +9,10 @@ export const CategoryListWrap = styled.nav`
 export const CategoryListUl = styled.ul`
   width: 80%;
   margin: 2em 0 0 0;
+
+  @media (max-width: 481px) {
+    margin: 0;
+  }
 `;
 
 export const CategoryItem = styled.li`
@@ -23,15 +27,10 @@ export const CategoryItem = styled.li`
     padding-left: 0.05em;
     transition: var(--transition-light);
   }
-`;
 
-export const DeleteCategory = styled.img`
-  width: 1em;
-  height: 1em;
-  margin-right: 0.5em;
-  cursor: pointer;
-
-  &:hover {
-    filter: grayscale(0.5);
+  @media (max-width: 481px) {
+    a {
+      color: #fff;
+    }
   }
 `;

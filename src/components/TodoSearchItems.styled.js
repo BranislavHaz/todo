@@ -14,4 +14,8 @@ export const SearchBar = styled.input.attrs({ type: "search" })`
     outline: none;
     border: var(--input-border-focus);
   }
+
+  @media (max-width: 769px) {
+    width: 80%;
+  }
 `;

@@ -1,17 +1,16 @@
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { postTodoCategory } from "../redux/todoSlice";
 
 import {
   AddCategoryForm,
-  InputWrap,
   AddCategoryInput,
-  ErrorMessage,
   AddCategorySubmit,
-} from "./AddTodoCategory.styled";
+} from "./CategoryAddItem.styled";
 
 const schema = yup.object().shape({
   name: yup
@@ -21,8 +20,10 @@ const schema = yup.object().shape({
     .required("Toto pole je povinné."),
 });
 
-const AddTodoCategory = () => {
+const CategoryAddItem = () => {
+  const navigate = useNavigate();
   const formRef = useRef(null);
+  const { categoriesList } = useSelector((state) => state.todo);
   const dispatch = useDispatch();
 
   const {
@@ -38,6 +39,8 @@ const AddTodoCategory = () => {
     dispatch(postTodoCategory(data.name));
     reset();
     formRef.current.reset();
+    const lastCategory = categoriesList[categoriesList?.length - 1];
+    navigate(`/todolist/${+lastCategory.id + 1}`);
   };
 
   return (
@@ -54,4 +57,4 @@ const AddTodoCategory = () => {
   );
 };
 
-export default AddTodoCategory;
+export default CategoryAddItem;

@@ -4,11 +4,11 @@ import {
   ErrorMessage,
   ErrorMessageImg,
   ErrorMessageText,
-} from "./TodoError.styled";
+} from "./TodoErrorMessage.styled";
 
 import searchingImg from "../img/searching.png";
 
-const TodoError = () => {
+const TodoErrorMessage = () => {
   return (
     <ErrorMessage>
       <ErrorMessageImg src={searchingImg}></ErrorMessageImg>
@@ -24,4 +24,4 @@ const TodoError = () => {
   );
 };
 
-export default TodoError;
+export default TodoErrorMessage;

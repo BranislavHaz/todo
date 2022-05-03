@@ -7,7 +7,12 @@ export const FilterWrap = styled.nav`
 export const FilterList = styled.ul`
   display: flex;
   justify-content: end;
-  margin-right: 3em;
+  margin-right: 2em;
+
+  @media (max-width: 1025px) {
+    justify-content: center;
+    margin: 0;
+  }
 `;
 
 export const FilterElement = styled.li`

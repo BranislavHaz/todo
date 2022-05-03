@@ -84,6 +84,7 @@ export const getTodoList = (idList) => {
       .get(`${apiUrl}/${idList}/todolist`)
       .then((resp) => dispatch(setTodo(resp.data)))
       .then(() => dispatch(setError({ type: "todo", state: false })))
+      .catch(() => dispatch(setTodo([])))
       .catch(() => dispatch(setError({ type: "todo", state: true })));
   };
 };

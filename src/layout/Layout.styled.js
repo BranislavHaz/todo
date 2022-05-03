@@ -13,4 +13,12 @@ export const Main = styled.main`
       border-right: 1px solid #d8ddde;
     }
   }
+
+  @media (max-width: 1025px) {
+    padding: 1em;
+  }
+
+  @media (max-width: 481px) {
+    padding: 0;
+  }
 `;
