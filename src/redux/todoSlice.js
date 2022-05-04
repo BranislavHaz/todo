@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const apiUrl = "https://626abc396a86cd64adb203dd.mockapi.io/api/list";
+const baseUrl = "https://626abc396a86cd64adb203dd.mockapi.io/api/list";
 
 const initialState = {
   todoList: [],
@@ -43,7 +43,7 @@ export const getTodoList = (idList) => {
   return (dispatch) => {
     dispatch(() => setTodoList([]));
     axios
-      .get(`${apiUrl}/${idList}/todolist`)
+      .get(`${baseUrl}/${idList}/todolist`)
       .then((resp) => {
         dispatch(setTodoList(resp.data));
         dispatch(setStateTodoLoad(true));
@@ -53,7 +53,7 @@ export const getTodoList = (idList) => {
         dispatch(setTodoList([]));
         dispatch(setStateTodoLoad(false));
         axios
-          .head(`${apiUrl}/${idList}`)
+          .head(`${baseUrl}/${idList}`)
           .then(() => dispatch(setStateTodoAvailable(true)))
           .catch(() => dispatch(setStateTodoAvailable(false)));
       });
@@ -64,7 +64,7 @@ export const getTodoList = (idList) => {
 export const postTodoItem = (idList, data) => {
   return (dispatch) => {
     axios
-      .post(`${apiUrl}/${idList}/todolist`, {
+      .post(`${baseUrl}/${idList}/todolist`, {
         listId: idList,
         title: data.title,
         text: data.text,
@@ -82,7 +82,7 @@ export const editTodoItem = (idList, idTodo) => {
     const isCompleted = list.find((todo) => todo.id === idTodo).isCompleted;
 
     axios
-      .put(`${apiUrl}/${idList}/todolist/${idTodo}`, {
+      .put(`${baseUrl}/${idList}/todolist/${idTodo}`, {
         isCompleted: !isCompleted,
       })
       .then(() => dispatch(getTodoList(idList)));
@@ -93,7 +93,7 @@ export const editTodoItem = (idList, idTodo) => {
 export const deleteTodoItem = (idList, idTodo) => {
   return (dispatch) => {
     axios
-      .delete(`${apiUrl}/${idList}/todolist/${idTodo}`)
+      .delete(`${baseUrl}/${idList}/todolist/${idTodo}`)
       .then(() => dispatch(getTodoList(idList)));
   };
 };
