@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const baseURL = "https://626abc396a86cd64adb203dd.mockapi.io/api/list";
+const baseUrl = "https://626abc396a86cd64adb203dd.mockapi.io/api/list";
 
 const initialState = {
   categoryListItems: [],
@@ -34,7 +34,7 @@ export default categorySlice.reducer;
 export const getCategoryItems = () => {
   return (dispatch) => {
     axios
-      .get(baseURL)
+      .get(baseUrl)
       .then((resp) => dispatch(setCategoryList(resp.data)))
       .then(() => dispatch(setCategoryLoad(true)))
       .catch(() => dispatch(setCategoryLoad(false)));
@@ -45,7 +45,7 @@ export const getCategoryItems = () => {
 export const postCategoryItems = (data) => {
   return (dispatch) => {
     axios
-      .post(baseURL, {
+      .post(baseUrl, {
         name: data,
       })
       .then(() => dispatch(getCategoryItems()));
